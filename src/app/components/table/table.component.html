@@ -1,0 +1,9 @@
+<table>
+  <tr>
+    <th *ngFor="let header of headers">{{ header }}</th>
+  </tr>
+  <tr *ngFor="let cellData of data">
+    <td>{{ cellData.user }}</td>
+    <td>{{ cellData.credit }}</td>
+  </tr>
+</table>

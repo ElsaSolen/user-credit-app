@@ -1,0 +1,6 @@
+<h1>User Credit</h1>
+<app-filter (inputChanged)="receiveInputData($event)"></app-filter>
+
+<ng-container *ngIf="filterSelector$ | async as data">
+  <app-table [data]="data"></app-table>
+</ng-container>

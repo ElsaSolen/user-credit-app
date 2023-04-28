@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  border: 1px solid #38678f;
+  background: white;
+}
+th {
+  background: steelblue;
+  height: 54px;
+  font-weight: lighter;
+  text-shadow: 0 1px 0 #38678f;
+  color: white;
+  border: 1px solid #38678f;
+  box-shadow: inset 0px 1px 2px #568ebd;
+}
+tr {
+  border-bottom: 1px solid #cccccc;
+}
+td {
+  border-right: 1px solid #cccccc;
+  padding: 10px;
+}
