@@ -1,47 +1,26 @@
 import {
   Component,
   EventEmitter,
-  OnDestroy,
   OnInit,
   Output,
+  HostListener,
+  ElementRef,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css'],
 })
-export class FilterComponent implements OnInit, OnDestroy {
+export class FilterComponent implements OnInit {
   @Output() inputChanged = new EventEmitter<string>();
 
-  private destroy$ = new Subject<void>();
-  form = new FormGroup({});
-
-  constructor() {}
-
-  ngOnInit(): void {
-    this.createForm();
-
-    //use @HostListener directive for the input changes
-    this.form
-      .get('searchUsers')
-      ?.valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe((val: string) => {
-        this.inputChanged.emit(val);
-      });
+  @HostListener('input', ['$event'])
+  onInput(event: InputEvent) {
+    this.inputChanged.emit(event.target.value);
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  constructor(private el: ElementRef) {}
 
-  public createForm(): void {
-    this.form = new FormGroup({
-      searchUsers: new FormControl(''),
-    });
-  }
+  ngOnInit(): void {}
 }

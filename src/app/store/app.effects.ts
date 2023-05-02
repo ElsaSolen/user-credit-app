@@ -9,10 +9,6 @@ import { AccountsService } from '../services/accounts.service';
 import { Store } from '@ngrx/store';
 import { setLoadingError } from './app.actions';
 
-//what if one preceeds the other.
-//make 2 different error handlers and test on one true.
-//Leave it on true on Error and set it to false on the concatMethod.
-
 @Injectable()
 export class AppEffects {
   userFetching$ = createEffect(() =>
@@ -20,12 +16,10 @@ export class AppEffects {
       ofType(StoreActions.getUserInfo),
       map((action) => this.userService.getUsers(action.user)),
       catchError((error) => {
-        //console.log('dispatch error users');
         this.store.dispatch(setLoadingError({ loadError: true }));
         return throwError(error);
       }),
       map((rawData) => {
-        //console.log('Users effect', rawData);
         return StoreActions.setUserInfo({
           users: rawData,
         });
@@ -37,14 +31,11 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(StoreActions.getUserInfo),
       map(() => this.accountsService.getAccounts()),
-      // add alert or action before throwError
       catchError((error) => {
-        //console.log('dispatch error Accounts');
         this.store.dispatch(setLoadingError({ loadError: true }));
         return throwError(error);
       }),
       map((rawData) => {
-        //console.log('Accounts effect', rawData);
         return StoreActions.setAccountInfo({
           accounts: rawData,
         });

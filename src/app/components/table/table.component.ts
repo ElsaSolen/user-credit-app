@@ -8,11 +8,9 @@ import { DataTable } from '../../interfaces/dataTable.interface';
 })
 export class TableComponent implements OnInit {
   @Input() data: DataTable[];
-  public headers: string[];
+  public headers = ['users', 'credits'];
 
-  constructor() {
-    this.headers = ['users', 'credits'];
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

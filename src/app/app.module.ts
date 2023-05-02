@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -17,11 +18,12 @@ import { UsersService } from './services/users.service';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    CommonModule,
     StoreModule.forRoot({ app: appReducer }),
     EffectsModule.forRoot([AppEffects]),
   ],
   declarations: [AppComponent, FilterComponent, TableComponent],
   bootstrap: [AppComponent],
-  providers: [AccountsService, UsersService]
+  providers: [AccountsService, UsersService],
 })
 export class AppModule {}

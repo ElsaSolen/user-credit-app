@@ -1,4 +1,5 @@
-form {
+:host {
+  display: block;
   padding-bottom: 1rem;
 }
 
