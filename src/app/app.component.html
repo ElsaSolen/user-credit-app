@@ -1,6 +1,25 @@
 <h1>User Credit</h1>
+
 <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
 
-<ng-container *ngIf="filterSelector$ | async as data">
-  <app-table [data]="data"></app-table>
+<ng-container *ngIf="showErrorPage$ | async; else content">
+  <h1>Failed to Load the image</h1>
 </ng-container>
+
+<ng-template #content>
+  <ng-container *ngIf="data">
+    <app-table [data]="data"></app-table>
+    <div *ngIf="data.length === 0">Meaw Meaw Nigga</div>
+  </ng-container>
+</ng-template>
+
+<!-- 
+  Problem:
+  
+  it doesn't enter the block #content so the filterSelector$ doesn't get subscribed to so it doesn't get accessed therefore the value of the showErrorPage$ doesn't get changed.
+
+  Solution:
+
+  1- subscribe/unsubscribe from the ts file.
+  2- move the logic for turning showErrorPage$ to false somewhere else, in this case switch the filterSelector$ selector pipable operators from tap to map and change the template ng-container to async.
+-->

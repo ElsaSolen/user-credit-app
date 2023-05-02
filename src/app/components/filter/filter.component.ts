@@ -17,8 +17,8 @@ import { takeUntil } from 'rxjs/operators';
 export class FilterComponent implements OnInit, OnDestroy {
   @Output() inputChanged = new EventEmitter<string>();
 
-  form = new FormGroup({});
   private destroy$ = new Subject<void>();
+  form = new FormGroup({});
 
   constructor() {}
 
@@ -37,9 +37,6 @@ export class FilterComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    //impossible to subscribe after completion
-
-    //so completing to prevent any futur subscribtions to the same Subject and in case there are other subscriptions that we didn't pay attention to, so it unsubscribes to them after complete, but in this case we only have 1 subscription and unsubscribing from it is way enough
   }
 
   public createForm(): void {

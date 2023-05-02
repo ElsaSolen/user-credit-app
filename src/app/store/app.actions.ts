@@ -12,8 +12,6 @@ export const setUserInfo = createAction(
   props<{ users: User[] }>()
 );
 
-export const getUserInfoError = createAction('[UserInfo] Error User Info');
-
 export const getAccountInfo = createAction('[AccountInfo] Get Account Info');
 
 export const setAccountInfo = createAction(
@@ -21,7 +19,8 @@ export const setAccountInfo = createAction(
   props<{ accounts: Account[] }>()
 );
 
-export const getAccountInfoError = createAction(
-  '[AccountInfo] Error Account Info',
-  props<{ message: string }>()
+//******* ERROR ********/
+export const setLoadingError = createAction(
+  '[Error] Get Info Error',
+  props<{ loadError: boolean }>()
 );

@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable, of, throwError } from 'rxjs';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { map, catchError, tap } from 'rxjs/operators';
 import * as StoreActions from './app.actions';
 import { UsersService } from '../services/users.service';
 import { AccountsService } from '../services/accounts.service';
-import { Account } from '../interfaces/account.interface';
-import { User } from '../interfaces/user.interface';
+import { Store } from '@ngrx/store';
+import { setLoadingError } from './app.actions';
 
-//TODO: Add error handler for Account effect
-//TODO: Add reducer and logic/screen/alert for error case
-//Check out the vs code example
-//Make Pr for each section
+//what if one preceeds the other.
+//make 2 different error handlers and test on one true.
+//Leave it on true on Error and set it to false on the concatMethod.
 
 @Injectable()
 export class AppEffects {
@@ -20,9 +19,13 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(StoreActions.getUserInfo),
       map((action) => this.userService.getUsers(action.user)),
-      // add alert or action before throwError
-      catchError((error) => throwError(error)),
+      catchError((error) => {
+        //console.log('dispatch error users');
+        this.store.dispatch(setLoadingError({ loadError: true }));
+        return throwError(error);
+      }),
       map((rawData) => {
+        //console.log('Users effect', rawData);
         return StoreActions.setUserInfo({
           users: rawData,
         });
@@ -35,8 +38,13 @@ export class AppEffects {
       ofType(StoreActions.getUserInfo),
       map(() => this.accountsService.getAccounts()),
       // add alert or action before throwError
-      catchError((error) => throwError(error)),
+      catchError((error) => {
+        //console.log('dispatch error Accounts');
+        this.store.dispatch(setLoadingError({ loadError: true }));
+        return throwError(error);
+      }),
       map((rawData) => {
+        //console.log('Accounts effect', rawData);
         return StoreActions.setAccountInfo({
           accounts: rawData,
         });
@@ -47,6 +55,7 @@ export class AppEffects {
   constructor(
     private actions$: Actions,
     private userService: UsersService,
-    private accountsService: AccountsService
+    private accountsService: AccountsService,
+    private store: Store
   ) {}
 }

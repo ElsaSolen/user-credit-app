@@ -1,43 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Account } from './interfaces/account.interface';
 import { DataTable } from './interfaces/dataTable.interface';
 import { User } from './interfaces/user.interface';
-import { getAccountInfo, getUserInfo } from './store/app.actions';
+import {
+  getAccountInfo,
+  getUserInfo,
+  setLoadingError,
+} from './store/app.actions';
 import * as selectors from './store/app.selectors';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-  //Checkout the folder structure
+export class AppComponent implements OnInit, OnDestroy {
+  private subscription$: Subscription;
+  data: DataTable[];
+
+  showErrorPage$ = this.store.select(selectors.getLoadingError);
   filterSelector$ = combineLatest([
     this.store.select(selectors.getUsers),
     this.store.select(selectors.getAccounts),
   ]).pipe(
-    map(([users, accounts]: [User[], Account[]]) => {
-      return this.cooncatById(users, accounts);
+    tap(([users, accounts]: [User[], Account[]]) => {
+      this.store.dispatch(setLoadingError({ loadError: false }));
+      this.cooncatById(users, accounts);
     })
   );
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.subscription$ = this.filterSelector$.subscribe();
     this.store.dispatch(getUserInfo({ user: '' }));
     this.store.dispatch(getAccountInfo());
   }
 
-  receiveInputData($event: string) {
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
+
+  receiveInputData($event: string): void {
     this.store.dispatch(getUserInfo({ user: $event }));
   }
 
-  cooncatById(userData: User[], creditsData: Account[]): DataTable[] {
+  cooncatById(userData: User[], creditsData: Account[]): void {
     const tableData: DataTable[] = [];
-
     userData.map((userItem: User) => {
       const creditItem = creditsData.find(
         (credit: Account) => credit.id === userItem.id
@@ -46,7 +59,6 @@ export class AppComponent implements OnInit {
         tableData.push({ user: userItem.name, credit: creditItem.credit });
       }
     });
-
-    return tableData;
+    this.data = tableData;
   }
 }
