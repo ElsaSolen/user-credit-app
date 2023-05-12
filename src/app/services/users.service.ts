@@ -4,7 +4,7 @@ import { User } from '../interfaces/user.interface';
 @Injectable()
 export class UsersService {
   getUsers(searchUser: string) {
-    if (searchUser.length >= 2) {
+    if (searchUser.length >= 5) {
       throw new Error('Error of getUsers!');
     } else {
       const x = users.filter((value: User) =>
