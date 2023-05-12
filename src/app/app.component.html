@@ -3,7 +3,7 @@
 <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
 
 <ng-container *ngIf="showErrorPage$ | async; else content">
-  <div class="warning">{{ 'Failed to Load the image' | uppercase }}</div>
+  <div class="warning">{{ 'Failed to Load the list' | uppercase }}</div>
 </ng-container>
 
 <ng-template #content>
@@ -12,12 +12,3 @@
     <div *ngIf="!data.length">Data not found</div>
   </ng-container>
 </ng-template>
-
-<!-- 
-  Problem:
-  it doesn't access the block #content so the filterSelector$ doesn't get subscribed to so it doesn't get accessed therefore the value of the showErrorPage$ doesn't get changed.
-
-  Solution:
-  1- subscribe/unsubscribe from the ts file.
-  2- move the logic for turning showErrorPage$ to false somewhere else, in this case switch the filterSelector$ selector pipable operators from tap to map and change the template ng-container to async.
--->

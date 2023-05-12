@@ -19,7 +19,6 @@ export const setAccountInfo = createAction(
   props<{ accounts: Account[] }>()
 );
 
-//******* ERROR ********/
 export const setLoadingError = createAction(
   '[Error] Get Info Error',
   props<{ loadError: boolean }>()

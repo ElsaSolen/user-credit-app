@@ -4,7 +4,6 @@ import {
   OnInit,
   Output,
   HostListener,
-  ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -16,12 +15,12 @@ export class FilterComponent implements OnInit {
   @Output() inputChanged = new EventEmitter<string>();
 
   @HostListener('input', ['$event'])
-  onInput(event: InputEvent) {
+  onInputChange(event: InputEvent) {
     const inputElement = event.target as HTMLInputElement;
     this.inputChanged.emit(inputElement.value);
   }
 
-  constructor(private el: ElementRef) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -1,20 +1,23 @@
 * {
   font-family: Lato;
   box-sizing: border-box;
-}
-h1 {
-  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-div {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #38678f;
+}
+h1 {
+  text-align: center;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+div {
+  max-width: 600px;
   height: 10rem;
+  border: 1px solid #38678f;
+  margin: 0 auto;
 }
 .warning {
   color: red;
   font-size: 20px;
+  text-align: center;
   border: 3px solid red;
 }
