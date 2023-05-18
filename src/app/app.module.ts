@@ -13,6 +13,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { TableComponent } from './components/table/table.component';
 import { AccountsService } from './services/accounts.service';
 import { UsersService } from './services/users.service';
+import { ThemeService } from './services/themes.service';
 @NgModule({
   imports: [
     BrowserModule,
@@ -24,6 +25,6 @@ import { UsersService } from './services/users.service';
   ],
   declarations: [AppComponent, FilterComponent, TableComponent],
   bootstrap: [AppComponent],
-  providers: [AccountsService, UsersService],
+  providers: [AccountsService, UsersService, ThemeService],
 })
 export class AppModule {}

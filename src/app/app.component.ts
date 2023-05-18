@@ -12,6 +12,7 @@ import {
 } from './store/app.actions';
 import * as selectors from './store/app.selectors';
 import { Subscription } from 'rxjs';
+import { ThemeService } from './services/themes.service';
 
 @Component({
   selector: 'my-app',
@@ -21,6 +22,7 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   private subscription$: Subscription;
   data: DataTable[];
+  dark: boolean;
 
   showErrorPage$ = this.store.select(selectors.getLoadingError);
   filterSelector$ = combineLatest([
@@ -33,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     })
   );
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private themeService: ThemeService) {}
 
   ngOnInit(): void {
     this.subscription$ = this.filterSelector$.subscribe();
@@ -43,6 +45,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
+  }
+
+  toggleTheme(): void {
+    this.dark = this.themeService.toggleTheme();
   }
 
   receiveInputData($event: string): void {

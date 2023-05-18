@@ -22,4 +22,5 @@ const users: User[] = [
   { id: 4, name: 'Rober' },
   { id: 5, name: 'John' },
   { id: 5, name: 'Trevor' },
+  { id: 5, name: 'Tanjiro' },
 ];

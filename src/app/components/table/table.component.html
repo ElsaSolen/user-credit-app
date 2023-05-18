@@ -1,9 +1,15 @@
+<button (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+  Previous
+</button>
 <table>
   <tr>
     <th *ngFor="let header of headers">{{ header }}</th>
   </tr>
-  <tr *ngFor="let cellData of data">
+  <tr *ngFor="let cellData of pagedData">
     <td>{{ cellData.user }}</td>
     <td>{{ cellData.credit }}</td>
   </tr>
 </table>
+<button (click)="goToNextPage()" [disabled]="currentPage === totalPages">
+  Next
+</button>
