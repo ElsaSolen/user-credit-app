@@ -1,18 +1,16 @@
-<ng-container [class.dark-theme]="dark" *ngIf="vm$ | async">
+<ng-container [class.dark-theme]="dark" >
   <h1>User Credit</h1>
-
   <button (click)="toggleTheme()">Press</button>
 
   <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
 
-  <ng-container *ngIf="showErrorPage$ | async; else content">
-    <div class="warning">{{ 'Failed to Load the list' | uppercase }}</div>
-  </ng-container>
+  <div *ngIf="showErrorPage$ | async; else content" class="warning">
+    {{ 'Failed to Load the list' | uppercase }}
+  </div>
 
   <ng-template #content>
-    <ng-container *ngIf="data">
-      <app-table [data]="data"></app-table>
-      <div *ngIf="!data.length">Data not found</div>
-    </ng-container>
+    <app-table *ngIf="(vm$ | async) && data.length" [data]="data"></app-table>
+
+    <div *ngIf="!data.length">Data not found</div>
   </ng-template>
 </ng-container>

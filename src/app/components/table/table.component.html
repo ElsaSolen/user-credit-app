@@ -10,6 +10,6 @@
     <td>{{ cellData.credit }}</td>
   </tr>
 </table>
-<button (click)="goToNextPage()" [disabled]="currentPage === totalPages">
+<button (click)="goToNextPage()" [disabled]="currentPage === totalPages || totalPages === 0">
   Next
 </button>

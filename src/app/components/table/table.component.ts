@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { DataTable } from '../../interfaces/dataTable.interface';
 
 @Component({
@@ -6,14 +12,14 @@ import { DataTable } from '../../interfaces/dataTable.interface';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges {
   @Input() data: DataTable[];
   headers = ['users', 'credits'];
 
   currentPage: number = 1;
   totalPages: number;
   itemsPerPage: number = 3;
-  pagedData: any[];
+  pagedData: DataTable[];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data) {
