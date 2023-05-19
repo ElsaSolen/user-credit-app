@@ -1,4 +1,3 @@
-import { findAllSubstringIndices } from '@angular/cdk/schematics/ng-update/public-api';
 import {
   Component,
   Input,
@@ -15,21 +14,23 @@ import { DataTable } from '../../interfaces/dataTable.interface';
 })
 export class TableComponent implements OnInit, OnChanges {
   @Input() data: DataTable[];
-  headers = ['users', 'credits'];
+  readonly headers: string[] = ['users', 'credits'];
 
   currentPage: number = 1;
-  totalPages: number;
   itemsPerPage: number = 3;
+
+  totalPages: number;
   pagedData: DataTable[];
-  previousButtonDisabled = false;
-  nextButtonDisabled = false;
+  previousButtonDisabled: boolean;
+  nextButtonDisabled: boolean;
+
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data) {
       this.calculatePagination();
     }
   }
-  constructor() {}
 
   ngOnInit(): void {
     this.calculatePagination();
@@ -40,6 +41,10 @@ export class TableComponent implements OnInit, OnChanges {
     const endIndex = startIndex + this.itemsPerPage;
     this.pagedData = this.data.slice(startIndex, endIndex);
     this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+    this.updateDisabledButtons();
+  }
+
+  updateDisabledButtons(): void {
     this.previousButtonDisabled = this.currentPage === 1;
     this.nextButtonDisabled =
       this.currentPage === this.totalPages || this.totalPages === 0;
@@ -51,7 +56,6 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   goToNextPage(): void {
-    console.log('go to next page');
     this.currentPage++;
     this.calculatePagination();
   }

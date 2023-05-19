@@ -3,6 +3,14 @@
   flex-direction: column;
 }
 
+table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  border: 1px solid #38678f;
+  background: white;
+}
+
 th {
   height: 54px;
   font-weight: lighter;
@@ -21,47 +29,42 @@ td {
   padding: 10px;
 }
 
-table {
-  width: 100%;
-  max-width: 600px;
-  border-collapse: collapse;
-  border: 1px solid #38678f;
-  background: white;
-}
-
 .pagination {
   &-buttons {
     width: 100%;
     max-width: 600px;
-    margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0.5rem;
 
     button {
-      background: white;
       color: #38678f;
+      background: white;
       border: 2px solid #38678f;
       border-radius: 3px;
       padding: 7px;
     }
+
     button:hover:not([disabled]) {
       color: white;
       background: #38678f;
     }
+
     button.disabled-button {
       color: white;
       background: lightgrey;
       border: none;
     }
   }
+
   &-status {
     width: 100%;
     max-width: 100px;
-    margin-top: 0.5rem;
     display: flex;
     justify-content: center;
     border: 2px solid #38678f;
     border-radius: 3px;
+    margin-top: 0.5rem;
     span {
       color: #38678f;
     }

@@ -1,4 +1,4 @@
-<ng-container [class.dark-theme]="dark" >
+<ng-container [class.dark-theme]="dark">
   <h1>User Credit</h1>
   <button (click)="toggleTheme()">Press</button>
 
@@ -9,8 +9,10 @@
   </div>
 
   <ng-template #content>
-    <app-table *ngIf="(vm$ | async) && data.length" [data]="data"></app-table>
-
+    <app-table
+      *ngIf="(tableDataSelector$ | async) && data.length"
+      [data]="data"
+    ></app-table>
     <div *ngIf="!data.length">Data not found</div>
   </ng-template>
 </ng-container>

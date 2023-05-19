@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   dark: boolean;
 
   showErrorPage$ = this.store.select(selectors.getLoadingError);
-  vm$ = combineLatest([
+  tableDataSelector$ = combineLatest([
     this.store.select(selectors.getUsers),
     this.store.select(selectors.getAccounts),
   ]).pipe(
