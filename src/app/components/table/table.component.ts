@@ -1,3 +1,4 @@
+import { findAllSubstringIndices } from '@angular/cdk/schematics/ng-update/public-api';
 import {
   Component,
   Input,
@@ -20,6 +21,8 @@ export class TableComponent implements OnInit, OnChanges {
   totalPages: number;
   itemsPerPage: number = 3;
   pagedData: DataTable[];
+  previousButtonDisabled = false;
+  nextButtonDisabled = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data) {
@@ -37,6 +40,9 @@ export class TableComponent implements OnInit, OnChanges {
     const endIndex = startIndex + this.itemsPerPage;
     this.pagedData = this.data.slice(startIndex, endIndex);
     this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+    this.previousButtonDisabled = this.currentPage === 1;
+    this.nextButtonDisabled =
+      this.currentPage === this.totalPages || this.totalPages === 0;
   }
 
   goToPreviousPage(): void {
@@ -45,6 +51,7 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   goToNextPage(): void {
+    console.log('go to next page');
     this.currentPage++;
     this.calculatePagination();
   }

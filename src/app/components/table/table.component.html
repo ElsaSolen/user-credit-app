@@ -1,6 +1,23 @@
-<button (click)="goToPreviousPage()" [disabled]="currentPage === 1">
-  Previous
-</button>
+<div class="pagination-buttons">
+  <button
+    (click)="goToPreviousPage()"
+    [disabled]="previousButtonDisabled"
+    [ngClass]="{
+      'disabled-button': previousButtonDisabled
+    }"
+  >
+    < Previous
+  </button>
+  <button
+    (click)="goToNextPage()"
+    [disabled]="nextButtonDisabled"
+    [ngClass]="{
+      'disabled-button': nextButtonDisabled
+    }"
+  >
+    Next >
+  </button>
+</div>
 <table>
   <tr>
     <th *ngFor="let header of headers">{{ header }}</th>
@@ -10,6 +27,6 @@
     <td>{{ cellData.credit }}</td>
   </tr>
 </table>
-<button (click)="goToNextPage()" [disabled]="currentPage === totalPages || totalPages === 0">
-  Next
-</button>
+<div class="pagination-status">
+  <span>{{ currentPage + '/' + totalPages }}</span>
+</div>
