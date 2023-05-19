@@ -1,4 +1,4 @@
-<ng-container [class.dark-theme]="dark">
+<ng-container [class.dark-theme]="dark" *ngIf="vm$ | async">
   <h1>User Credit</h1>
 
   <button (click)="toggleTheme()">Press</button>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -11,7 +11,6 @@ import {
   setLoadingError,
 } from './store/app.actions';
 import * as selectors from './store/app.selectors';
-import { Subscription } from 'rxjs';
 import { ThemeService } from './services/themes.service';
 
 @Component({
@@ -19,13 +18,12 @@ import { ThemeService } from './services/themes.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private subscription$: Subscription;
+export class AppComponent implements OnInit {
   data: DataTable[];
   dark: boolean;
 
   showErrorPage$ = this.store.select(selectors.getLoadingError);
-  filterSelector$ = combineLatest([
+  vm$ = combineLatest([
     this.store.select(selectors.getUsers),
     this.store.select(selectors.getAccounts),
   ]).pipe(
@@ -38,13 +36,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.subscription$ = this.filterSelector$.subscribe();
     this.store.dispatch(getUserInfo({ user: '' }));
     this.store.dispatch(getAccountInfo());
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
   }
 
   toggleTheme(): void {

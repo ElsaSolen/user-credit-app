@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { DataTable } from '../../interfaces/dataTable.interface';
 
 @Component({
@@ -15,6 +15,11 @@ export class TableComponent implements OnInit {
   itemsPerPage: number = 3;
   pagedData: any[];
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.data) {
+      this.calculatePagination();
+    }
+  }
   constructor() {}
 
   ngOnInit(): void {
