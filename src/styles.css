@@ -1,1 +1,7 @@
 /* Add application styles & imports to this file! */
+
+/* refactor this to Observable fed data to app as well*/
+.dark-theme {
+  background: #333;
+  color: #fff;
+}

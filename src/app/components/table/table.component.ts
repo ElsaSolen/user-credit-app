@@ -6,6 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DataTable } from '../../interfaces/dataTable.interface';
+import { ThemeService } from '../../services/themes.service';
 
 @Component({
   selector: 'app-table',
@@ -18,13 +19,15 @@ export class TableComponent implements OnInit, OnChanges {
 
   currentPage: number = 1;
   itemsPerPage: number = 3;
+  isDarkThemeTable: boolean = false;
+
 
   totalPages: number;
   pagedData: DataTable[];
   previousButtonDisabled: boolean;
   nextButtonDisabled: boolean;
 
-  constructor() {}
+  constructor(private themeService: ThemeService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data) {
@@ -34,6 +37,11 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.calculatePagination();
+    this.themeService
+      .getThemeChangeSubject()
+      .subscribe((isDarkTheme: boolean) => {
+        this.isDarkThemeTable = isDarkTheme;
+      });
   }
 
   calculatePagination(): void {

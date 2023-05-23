@@ -1,4 +1,16 @@
-<div class="pagination-buttons">
+<table [ngClass]="{ 'dark-theme-table': isDarkThemeTable }">
+  <tr>
+    <th *ngFor="let header of headers">{{ header }}</th>
+  </tr>
+  <tr *ngFor="let cellData of pagedData">
+    <td>{{ cellData.user }}</td>
+    <td>{{ cellData.credit }}</td>
+  </tr>
+</table>
+<div
+  class="pagination-buttons"
+  [ngClass]="{ 'dark-theme-pagination-buttons': isDarkThemeTable }"
+>
   <button
     (click)="goToPreviousPage()"
     [disabled]="previousButtonDisabled"
@@ -18,15 +30,9 @@
     Next >
   </button>
 </div>
-<table>
-  <tr>
-    <th *ngFor="let header of headers">{{ header }}</th>
-  </tr>
-  <tr *ngFor="let cellData of pagedData">
-    <td>{{ cellData.user }}</td>
-    <td>{{ cellData.credit }}</td>
-  </tr>
-</table>
-<div class="pagination-status">
+<div
+  class="pagination-status"
+  [ngClass]="{ 'dark-theme-pagination-status': isDarkThemeTable }"
+>
   <span>{{ currentPage + '/' + totalPages }}</span>
 </div>

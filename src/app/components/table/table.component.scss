@@ -3,32 +3,48 @@
   flex-direction: column;
 }
 
+/* Table section */
 table {
   width: 100%;
   max-width: 600px;
   border-collapse: collapse;
   border: 1px solid #38678f;
   background: white;
+  order: 2;
+  th {
+    height: 54px;
+    font-weight: lighter;
+    text-align: center;
+    background: linear-gradient(to bottom right, steelblue, #38678f);
+    color: white;
+    border: 1px solid #38678f;
+  }
+  tr {
+    border-bottom: 1px solid #cccccc;
+  }
+  td {
+    border-right: 1px solid #cccccc;
+    padding: 10px;
+  }
 }
 
-th {
-  height: 54px;
-  font-weight: lighter;
-  text-align: center;
-  background: steelblue;
-  color: white;
-  border: 1px solid #38678f;
+.dark-theme-table {
+  th {
+    background: #333;
+    border: 1px solid #e19f4d;
+    background: linear-gradient(to bottom right, #e19f4d, #ae5a3b);
+  }
+  tr {
+    color: #cccccc;
+    background: #333;
+    border-left: 1px solid #cccccc;
+  }
+  td {
+    color: #cccccc;
+    background: #333;
+  }
 }
-
-tr {
-  border-bottom: 1px solid #cccccc;
-}
-
-td {
-  border-right: 1px solid #cccccc;
-  padding: 10px;
-}
-
+/*Pagination section that needs to be extracted*/
 .pagination {
   &-buttons {
     width: 100%;
@@ -36,6 +52,7 @@ td {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.5rem;
+    order: 1;
 
     button {
       color: #38678f;
@@ -44,19 +61,16 @@ td {
       border-radius: 3px;
       padding: 7px;
     }
-
     button:hover:not([disabled]) {
       color: white;
       background: #38678f;
     }
-
     button.disabled-button {
       color: white;
       background: lightgrey;
       border: none;
     }
   }
-
   &-status {
     width: 100%;
     max-width: 100px;
@@ -65,8 +79,33 @@ td {
     border: 2px solid #38678f;
     border-radius: 3px;
     margin-top: 0.5rem;
+    order: 3;
     span {
       color: #38678f;
+    }
+  }
+}
+.dark-theme-pagination {
+  &-buttons {
+    button {
+      color: #e19f4d;
+      background: #333;
+      border: 2px solid #e19f4d;
+    }
+    button:hover:not([disabled]) {
+      color: white;
+      background: #e19f4d;
+    }
+    button.disabled-button {
+      color: white;
+      background: rgb(169, 169, 169);
+      border: none;
+    }
+  }
+  &-status {
+    border: 2px solid #e19f4d;
+    span {
+      color: #e19f4d;
     }
   }
 }

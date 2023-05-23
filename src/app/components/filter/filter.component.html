@@ -1,2 +1,7 @@
 <label for="search">Search Name</label>
-<input type="text" name="search" (input)="onInputChange($event)" />
+<input
+  type="text"
+  name="search"
+  (input)="onInputChange($event)"
+  [ngClass]="{ 'dark-theme-input': isDarkThemeTable }"
+/>

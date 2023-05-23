@@ -20,7 +20,8 @@ import { ThemeService } from './services/themes.service';
 })
 export class AppComponent implements OnInit {
   data: DataTable[];
-  dark: boolean;
+  isDarkThemeTable: boolean = false;
+
 
   showErrorPage$ = this.store.select(selectors.getLoadingError);
   tableDataSelector$ = combineLatest([
@@ -38,10 +39,16 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(getUserInfo({ user: '' }));
     this.store.dispatch(getAccountInfo());
+    this.themeService
+      .getThemeChangeSubject()
+      .subscribe((isDarkTheme: boolean) => {
+        this.isDarkThemeTable = isDarkTheme;
+      });
   }
 
   toggleTheme(): void {
-    this.dark = this.themeService.toggleTheme();
+    console.log('theme button pressed');
+    this.themeService.toggleTheme();
   }
 
   receiveInputData($event: string): void {

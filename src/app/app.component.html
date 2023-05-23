@@ -1,18 +1,23 @@
-<ng-container [class.dark-theme]="dark">
-  <h1>User Credit</h1>
-  <button (click)="toggleTheme()">Press</button>
+<h1>User Credit</h1>
+<button
+  (click)="toggleTheme()"
+  [ngClass]="{ 'dark-theme-button': isDarkThemeTable }"
+>
+  Press
+</button>
 
-  <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
+<app-filter (inputChanged)="receiveInputData($event)"></app-filter>
 
-  <div *ngIf="showErrorPage$ | async; else content" class="warning">
-    {{ 'Failed to Load the list' | uppercase }}
+<div *ngIf="showErrorPage$ | async; else content" class="warning">
+  {{ 'Failed to Load the list' | uppercase }}
+</div>
+
+<ng-template #content>
+  <app-table
+    *ngIf="(tableDataSelector$ | async) && data.length"
+    [data]="data"
+  ></app-table>
+  <div *ngIf="!data.length" [ngClass]="{ 'dark-theme-div': isDarkThemeTable }">
+    Data not found
   </div>
-
-  <ng-template #content>
-    <app-table
-      *ngIf="(tableDataSelector$ | async) && data.length"
-      [data]="data"
-    ></app-table>
-    <div *ngIf="!data.length">Data not found</div>
-  </ng-template>
-</ng-container>
+</ng-template>

@@ -12,3 +12,10 @@ input:focus {
   box-shadow: 0 1px 0 steelblue;
   color: steelblue;
 }
+.dark-theme-input {
+  outline-color: #e19f4d;
+}
+.dark-theme-input:focus {
+  box-shadow: 0 1px 0 #e19f4d;
+  color: #e19f4d;
+}

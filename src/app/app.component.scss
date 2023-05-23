@@ -15,6 +15,10 @@ div {
   border: 1px solid #38678f;
   margin: 0 auto;
 }
+.dark-theme-div {
+  border: 1px solid #e19f4d;
+}
+
 .warning {
   color: red;
   font-size: 20px;
@@ -30,12 +34,9 @@ button {
   border-radius: 50%;
   border: none;
 }
-
+.dark-theme-button {
+  background: #e19f4d;
+}
 button:active {
   background: #568ebd;
-}
-
-.dark-theme {
-  background-color: #333;
-  color: #fff;
 }
