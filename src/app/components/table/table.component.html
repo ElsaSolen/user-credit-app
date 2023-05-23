@@ -1,4 +1,4 @@
-<table [ngClass]="{ 'dark-theme-table': isDarkTheme }">
+<table>
   <tr>
     <th *ngFor="let header of headers">{{ header }}</th>
   </tr>
@@ -7,10 +7,7 @@
     <td>{{ cellData.credit }}</td>
   </tr>
 </table>
-<div
-  class="pagination-buttons"
-  [ngClass]="{ 'dark-theme-pagination-buttons': isDarkTheme }"
->
+<div class="pagination-buttons">
   <button
     (click)="goToPreviousPage()"
     [disabled]="previousButtonDisabled"
@@ -30,16 +27,10 @@
     Next >
   </button>
 </div>
-<div
-  class="pagination-status"
-  [ngClass]="{ 'dark-theme-pagination-status': isDarkTheme }"
->
+<div class="pagination-status">
   <span>{{ currentPage + '/' + totalPages }}</span>
 </div>
-<select
-  (change)="onSelectionChange($event.target.value)"
-  [ngClass]="{ 'dark-theme-select': isDarkTheme }"
->
+<select (change)="onSelectionChange($event.target.value)">
   >
   <option *ngFor="let option of itemsPerPage" [value]="option">
     {{ option }}

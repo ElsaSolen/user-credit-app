@@ -14,7 +14,6 @@ import { DataTable } from '../../interfaces/dataTable.interface';
 })
 export class TableComponent implements OnInit, OnChanges {
   @Input() data: DataTable[];
-  @Input() isDarkTheme: boolean;
   readonly headers: string[] = ['users', 'credits'];
 
   currentPage: number = 1;

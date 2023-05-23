@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,9 +6,8 @@ import { Subject } from 'rxjs';
 export class ThemeService {
   private isDarkTheme: boolean = false;
 
-  toggleTheme(): boolean {
+  toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
     document.body.classList.toggle('dark-theme', this.isDarkTheme);
-    return this.isDarkTheme;
   }
 }

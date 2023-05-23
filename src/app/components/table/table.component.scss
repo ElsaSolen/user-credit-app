@@ -3,48 +3,36 @@
   flex-direction: column;
 }
 
-/* Table section */
 table {
   width: 100%;
   max-width: 600px;
   border-collapse: collapse;
-  border: 1px solid #38678f;
-  background: white;
+  border: 1px solid var(--secondary-color);
+  background: var(--background);
   order: 2;
   th {
     height: 54px;
     font-weight: lighter;
     text-align: center;
-    background: linear-gradient(to bottom right, steelblue, #38678f);
+    background: linear-gradient(
+      to bottom right,
+      var(--primary-color),
+      var(--secondary-color)
+    );
     color: white;
-    border: 1px solid #38678f;
+    border: 1px solid var(--secondary-color);
   }
   tr {
-    border-bottom: 1px solid #cccccc;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--off-white);
   }
   td {
-    border-right: 1px solid #cccccc;
+    color: var(--text-color);
+    border-right: 1px solid var(--off-white);
     padding: 10px;
   }
 }
 
-.dark-theme-table {
-  th {
-    background: #333;
-    border: 1px solid #e19f4d;
-    background: linear-gradient(to bottom right, #e19f4d, #ae5a3b);
-  }
-  tr {
-    color: #cccccc;
-    background: #333;
-    border-left: 1px solid #cccccc;
-  }
-  td {
-    color: #cccccc;
-    background: #333;
-  }
-}
-/*Pagination section that needs to be extracted*/
 .pagination {
   &-buttons {
     width: 100%;
@@ -55,19 +43,19 @@ table {
     order: 1;
 
     button {
-      color: #38678f;
+      color: var(--secondary-color);
       background: white;
-      border: 2px solid #38678f;
+      border: 2px solid var(--secondary-color);
       border-radius: 3px;
       padding: 7px;
     }
     button:hover:not([disabled]) {
       color: white;
-      background: #38678f;
+      background: var(--secondary-color);
     }
     button.disabled-button {
       color: white;
-      background: lightgrey;
+      background: var(--button-grey);
       border: none;
     }
   }
@@ -76,36 +64,12 @@ table {
     max-width: 100px;
     display: flex;
     justify-content: center;
-    border: 2px solid #38678f;
+    border: 2px solid var(--secondary-color);
     border-radius: 3px;
     margin-top: 0.5rem;
     order: 3;
     span {
-      color: #38678f;
-    }
-  }
-}
-.dark-theme-pagination {
-  &-buttons {
-    button {
-      color: #e19f4d;
-      background: #333;
-      border: 2px solid #e19f4d;
-    }
-    button:hover:not([disabled]) {
-      color: white;
-      background: #e19f4d;
-    }
-    button.disabled-button {
-      color: white;
-      background: rgb(169, 169, 169);
-      border: none;
-    }
-  }
-  &-status {
-    border: 2px solid #e19f4d;
-    span {
-      color: #e19f4d;
+      color: var(--secondary-color);
     }
   }
 }
@@ -114,10 +78,6 @@ select {
   order: 4;
   padding: 5px;
   margin: 5px;
-  color: #38678f;
-}
-
-.dark-theme-select {
-  outline-color: #e19f4d;
-  color: #e19f4d;
+  color: var(--secondary-color);
+  outline-color: var(--secondary-color);
 }

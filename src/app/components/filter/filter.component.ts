@@ -13,7 +13,6 @@ import {
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
-  @Input() isDarkTheme: boolean;
   @Output() inputChanged = new EventEmitter<string>();
 
   @HostListener('input', ['$event'])

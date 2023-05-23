@@ -20,7 +20,6 @@ import { ThemeService } from './services/themes.service';
 })
 export class AppComponent implements OnInit {
   data: DataTable[];
-  isDarkTheme: boolean = false;
 
   showErrorPage$ = this.store.select(selectors.getLoadingError);
   tableDataSelector$ = combineLatest([
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   toggleTheme(): void {
-    this.isDarkTheme = this.themeService.toggleTheme();
+   this.themeService.toggleTheme();
   }
 
   receiveInputData($event: string): void {
