@@ -1,4 +1,4 @@
-<table [ngClass]="{ 'dark-theme-table': isDarkThemeTable }">
+<table [ngClass]="{ 'dark-theme-table': isDarkTheme }">
   <tr>
     <th *ngFor="let header of headers">{{ header }}</th>
   </tr>
@@ -9,7 +9,7 @@
 </table>
 <div
   class="pagination-buttons"
-  [ngClass]="{ 'dark-theme-pagination-buttons': isDarkThemeTable }"
+  [ngClass]="{ 'dark-theme-pagination-buttons': isDarkTheme }"
 >
   <button
     (click)="goToPreviousPage()"
@@ -32,7 +32,16 @@
 </div>
 <div
   class="pagination-status"
-  [ngClass]="{ 'dark-theme-pagination-status': isDarkThemeTable }"
+  [ngClass]="{ 'dark-theme-pagination-status': isDarkTheme }"
 >
   <span>{{ currentPage + '/' + totalPages }}</span>
 </div>
+<select
+  (change)="onSelectionChange($event.target.value)"
+  [ngClass]="{ 'dark-theme-select': isDarkTheme }"
+>
+  >
+  <option *ngFor="let option of itemsPerPage" [value]="option">
+    {{ option }}
+  </option>
+</select>

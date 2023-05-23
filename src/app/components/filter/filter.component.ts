@@ -3,9 +3,9 @@ import {
   EventEmitter,
   OnInit,
   Output,
+  Input,
   HostListener,
 } from '@angular/core';
-import { ThemeService } from '../../services/themes.service';
 
 @Component({
   selector: 'app-filter',
@@ -13,8 +13,8 @@ import { ThemeService } from '../../services/themes.service';
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
+  @Input() isDarkTheme: boolean;
   @Output() inputChanged = new EventEmitter<string>();
-  isDarkThemeTable: boolean = false;
 
   @HostListener('input', ['$event'])
   onInputChange(event: InputEvent) {
@@ -22,13 +22,7 @@ export class FilterComponent implements OnInit {
     this.inputChanged.emit(inputElement.value);
   }
 
-  constructor(private themeService: ThemeService) {
-    this.themeService
-      .getThemeChangeSubject()
-      .subscribe((isDarkTheme: boolean) => {
-        this.isDarkThemeTable = isDarkTheme;
-      });
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

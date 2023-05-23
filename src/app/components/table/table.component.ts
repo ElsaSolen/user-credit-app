@@ -6,7 +6,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DataTable } from '../../interfaces/dataTable.interface';
-import { ThemeService } from '../../services/themes.service';
 
 @Component({
   selector: 'app-table',
@@ -15,19 +14,19 @@ import { ThemeService } from '../../services/themes.service';
 })
 export class TableComponent implements OnInit, OnChanges {
   @Input() data: DataTable[];
+  @Input() isDarkTheme: boolean;
   readonly headers: string[] = ['users', 'credits'];
 
   currentPage: number = 1;
-  itemsPerPage: number = 3;
-  isDarkThemeTable: boolean = false;
-
+  itemsPerPage: number[] = [3, 5, 10];
+  selectedOption: number = 3;
 
   totalPages: number;
   pagedData: DataTable[];
   previousButtonDisabled: boolean;
   nextButtonDisabled: boolean;
 
-  constructor(private themeService: ThemeService) {}
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data) {
@@ -37,18 +36,13 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.calculatePagination();
-    this.themeService
-      .getThemeChangeSubject()
-      .subscribe((isDarkTheme: boolean) => {
-        this.isDarkThemeTable = isDarkTheme;
-      });
   }
 
   calculatePagination(): void {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
+    const startIndex = (this.currentPage - 1) * this.selectedOption;
+    const endIndex = startIndex + this.selectedOption;
     this.pagedData = this.data.slice(startIndex, endIndex);
-    this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.data.length / this.selectedOption);
     this.updateDisabledButtons();
   }
 
@@ -65,6 +59,11 @@ export class TableComponent implements OnInit, OnChanges {
 
   goToNextPage(): void {
     this.currentPage++;
+    this.calculatePagination();
+  }
+
+  onSelectionChange(selection: number): void {
+    this.selectedOption = selection;
     this.calculatePagination();
   }
 }

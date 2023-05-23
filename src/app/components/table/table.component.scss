@@ -109,3 +109,15 @@ table {
     }
   }
 }
+
+select {
+  order: 4;
+  padding: 5px;
+  margin: 5px;
+  color: #38678f;
+}
+
+.dark-theme-select {
+  outline-color: #e19f4d;
+  color: #e19f4d;
+}
