@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     this.store.select(selectors.getAccounts),
   ]).pipe(
     tap(([users, accounts]: [User[], Account[]]) => {
+      console.log('aaa');
       this.store.dispatch(setLoadingError({ loadError: false }));
       this.cooncatById(users, accounts);
     })
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit {
 
   cooncatById(userData: User[], creditsData: Account[]): void {
     const tableData: DataTable[] = [];
-    userData.map((userItem: User) => {
+    userData?.map((userItem: User) => {
       const creditItem = creditsData.find(
         (credit: Account) => credit.id === userItem.id
       );

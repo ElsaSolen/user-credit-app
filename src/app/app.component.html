@@ -12,7 +12,7 @@
     *ngIf="(tableDataSelector$ | async) && data.length"
     [data]="data"
   ></app-table>
-  <div *ngIf="!data.length">
+  <div *ngIf="!data?.length">
     Data not found
   </div>
 </ng-template>

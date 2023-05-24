@@ -20,7 +20,7 @@ export class PaginatorComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number[] = [3, 5, 10];
   selectedOption: number = 3;
-  length: number;
+  length: number = 0;
 
   totalPages: number;
   previousButtonDisabled: boolean;

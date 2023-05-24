@@ -7,10 +7,13 @@ export class UsersService {
     if (searchUser.length >= 10) {
       throw new Error('Error of getUsers!');
     } else {
-      const x = users.filter((value: User) =>
+      const filteredUsers = users.filter((value: User) =>
         value.name.toLowerCase().includes(searchUser.toLowerCase())
       );
-      return x;
+      //setTimeout(() => {
+      // console.log('filteredUsers', filteredUsers);
+      return filteredUsers;
+      //  }, 1000);
     }
   }
 }
