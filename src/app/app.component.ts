@@ -28,13 +28,18 @@ export class AppComponent implements OnInit {
   tableDataSelector$ = combineLatest([
     this.store.select(selectors.getUsers),
     this.store.select(selectors.getAccounts),
+    this.store.select(selectors.getLoader),
   ]).pipe(
-    tap(([users, accounts]: [User[], Account[]]) => {
+    tap(([users, accounts, spinner]: [User[], Account[], boolean]) => {
       this.store.dispatch(setError({ error: false }));
-      if (users?.length && accounts?.length) {
+      if (users?.length && accounts?.length && spinner) {
         this.cooncatById(users, accounts);
         this.store.dispatch(setLoader({ loader: false }));
         this.cdRef.detectChanges();
+      } else if (!spinner) {
+        //console.log('this is else if')
+        //this.cooncatById(users, accounts);
+        //we want a case in which the spinner is false and users AND/OR accounts are empty to showcase the "Data not found" div
       }
     })
   );
@@ -59,6 +64,7 @@ export class AppComponent implements OnInit {
   }
 
   cooncatById(userData: User[], creditsData: Account[]): void {
+    console.log(userData, creditsData);
     const tableData: DataTable[] = [];
     userData.map((userItem: User) => {
       const creditItem = creditsData.find(
