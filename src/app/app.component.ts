@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
 
   spinner$ = this.store.select(selectors.getLoader);
   showErrorPage$ = this.store.select(selectors.getError);
+  dataNotFound: boolean = false;
 
   tableDataSelector$ = combineLatest([
     this.store.select(selectors.getUsers),
@@ -36,10 +37,10 @@ export class AppComponent implements OnInit {
         this.cooncatById(users, accounts);
         this.store.dispatch(setLoader({ loader: false }));
         this.cdRef.detectChanges();
-      } else if (!spinner) {
-        //console.log('this is else if')
-        //this.cooncatById(users, accounts);
-        //we want a case in which the spinner is false and users AND/OR accounts are empty to showcase the "Data not found" div
+      } else if ((!users?.length || !accounts?.length )&& !spinner) {
+        this.dataNotFound = true;
+      } else {
+        this.cooncatById(users, accounts);
       }
     })
   );
@@ -61,6 +62,7 @@ export class AppComponent implements OnInit {
 
   receiveInputData($event: string): void {
     this.store.dispatch(getUserInfo({ user: $event }));
+    this.dataNotFound = false;
   }
 
   cooncatById(userData: User[], creditsData: Account[]): void {

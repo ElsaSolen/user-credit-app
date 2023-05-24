@@ -13,5 +13,5 @@
     *ngIf="(tableDataSelector$ | async) && data?.length"
     [data]="data"
   ></app-table>
-  <div *ngIf="!data?.length && spinner">Data not found</div>
+  <div *ngIf="dataNotFound">Data not found</div>
 </ng-template>
