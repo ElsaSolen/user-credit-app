@@ -8,9 +8,7 @@
 </div>
 
 <ng-template #content>
-  <div class="spinner" *ngIf="spinner$ | async as spinner">
-    <div class="spinner-inner"></div>
-  </div>
+  <spinner *ngIf="spinner$ | async as spinner"></spinner>
   <app-table
     *ngIf="(tableDataSelector$ | async) && data?.length"
     [data]="data"
