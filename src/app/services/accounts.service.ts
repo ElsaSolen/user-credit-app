@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Account } from '../interfaces/account.interface';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class AccountsService {
-  getAccounts() {
-    return accounts;
+  getAccounts(): Observable<Account[]> {
+    return of(accounts);
   }
 }
 

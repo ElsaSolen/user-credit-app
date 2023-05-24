@@ -13,7 +13,9 @@ export const getAccounts = createSelector(
   (state: AppState) => state.accounts
 );
 
-export const getLoadingError = createSelector(
+export const getError = createSelector(selectAppState, (state) => state.error);
+
+export const getLoader = createSelector(
   selectAppState,
-  (state) => state.loadError
+  (state) => state.loader
 );

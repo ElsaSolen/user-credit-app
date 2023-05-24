@@ -8,11 +8,12 @@
 </div>
 
 <ng-template #content>
+  <div class="spinner" *ngIf="spinner$ | async as spinner">
+    <div class="spinner-inner"></div>
+  </div>
   <app-table
-    *ngIf="(tableDataSelector$ | async) && data.length"
+    *ngIf="(tableDataSelector$ | async) && data?.length"
     [data]="data"
   ></app-table>
-  <div *ngIf="!data?.length">
-    Data not found
-  </div>
+  <div *ngIf="!data?.length && spinner">Data not found</div>
 </ng-template>

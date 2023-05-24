@@ -19,7 +19,12 @@ export const setAccountInfo = createAction(
   props<{ accounts: Account[] }>()
 );
 
-export const setLoadingError = createAction(
+export const setError = createAction(
   '[Error] Get Info Error',
-  props<{ loadError: boolean }>()
+  props<{ error: boolean }>()
+);
+
+export const setLoader = createAction(
+  '[Loader] Set Loader',
+  props<{ loader: boolean }>()
 );

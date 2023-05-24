@@ -4,5 +4,6 @@ import { User } from '../interfaces/user.interface';
 export interface AppState {
   users: User[];
   accounts: Account[];
-  loadError: boolean;
+  error: boolean;
+  loader: boolean;
 }

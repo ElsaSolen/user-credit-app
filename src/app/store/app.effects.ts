@@ -1,44 +1,63 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
 import { throwError } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError, mergeMap } from 'rxjs/operators';
 import * as StoreActions from './app.actions';
 import { UsersService } from '../services/users.service';
 import { AccountsService } from '../services/accounts.service';
 import { Store } from '@ngrx/store';
-import { setLoadingError } from './app.actions';
+import { setError } from './app.actions';
 
 @Injectable()
 export class AppEffects {
+  
   userFetching$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoreActions.getUserInfo),
-      map((action) => this.userService.getUsers(action.user)),
+      mergeMap((action) => this.userService.getUsers(action.user)),
       catchError((error) => {
-        this.store.dispatch(setLoadingError({ loadError: true }));
+        this.store.dispatch(setError({ error: true }));
         return throwError(error);
       }),
-      map((rawData) => {
-        return StoreActions.setUserInfo({
-          users: rawData,
-        });
+      map((rawData): any => {
+        if (rawData) {
+          console.log('--users', rawData);
+          return StoreActions.setUserInfo({
+            users: rawData,
+          });
+        } else {
+          console.log('--spinner effect', true);
+          return StoreActions.setLoader({
+            loader: true,
+          });
+        }
       })
     )
   );
 
+
+
+
   accountsFetching$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoreActions.getUserInfo),
-      map(() => this.accountsService.getAccounts()),
+      mergeMap(() => this.accountsService.getAccounts()),
       catchError((error) => {
-        this.store.dispatch(setLoadingError({ loadError: true }));
+        this.store.dispatch(setError({ error: true }));
         return throwError(error);
       }),
       map((rawData) => {
-        return StoreActions.setAccountInfo({
-          accounts: rawData,
-        });
+        if (rawData) {
+          console.log('--accounts', rawData);
+          return StoreActions.setAccountInfo({
+            accounts: rawData,
+          });
+        } else {
+          console.log('--spinner effect', rawData);
+          return StoreActions.setLoader({
+            loader: true,
+          });
+        }
       })
     )
   );

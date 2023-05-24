@@ -1,11 +1,17 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { setUserInfo, setAccountInfo, setLoadingError } from './app.actions';
+import {
+  setUserInfo,
+  setAccountInfo,
+  setError,
+  setLoader,
+} from './app.actions';
 import { AppState } from './app.state';
 
 export const initialState: AppState = {
   users: [],
   accounts: [],
-  loadError: false,
+  error: false,
+  loader: true,
 };
 
 const reducer = createReducer(
@@ -18,9 +24,13 @@ const reducer = createReducer(
     ...state,
     accounts,
   })),
-  on(setLoadingError, (state, { loadError }) => ({
+  on(setError, (state, { error }) => ({
     ...state,
-    loadError,
+    error,
+  })),
+  on(setLoader, (state, { loader }) => ({
+    ...state,
+    loader,
   }))
 );
 export function appReducer(state: AppState, action: Action): AppState {

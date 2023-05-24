@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { User } from './interfaces/user.interface';
 import {
   getAccountInfo,
   getUserInfo,
-  setLoadingError,
+  setError,
+  setLoader,
 } from './store/app.actions';
 import * as selectors from './store/app.selectors';
 import { ThemeService } from './services/themes.service';
@@ -21,19 +22,28 @@ import { ThemeService } from './services/themes.service';
 export class AppComponent implements OnInit {
   data: DataTable[];
 
-  showErrorPage$ = this.store.select(selectors.getLoadingError);
+  spinner$ = this.store.select(selectors.getLoader);
+  showErrorPage$ = this.store.select(selectors.getError);
+
   tableDataSelector$ = combineLatest([
     this.store.select(selectors.getUsers),
     this.store.select(selectors.getAccounts),
   ]).pipe(
     tap(([users, accounts]: [User[], Account[]]) => {
-      console.log('aaa');
-      this.store.dispatch(setLoadingError({ loadError: false }));
-      this.cooncatById(users, accounts);
+      this.store.dispatch(setError({ error: false }));
+      if (users?.length && accounts?.length) {
+        this.cooncatById(users, accounts);
+        this.store.dispatch(setLoader({ loader: false }));
+        this.cdRef.detectChanges();
+      }
     })
   );
 
-  constructor(private store: Store, private themeService: ThemeService) {}
+  constructor(
+    private store: Store,
+    private themeService: ThemeService,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(getUserInfo({ user: '' }));
@@ -41,7 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   toggleTheme(): void {
-   this.themeService.toggleTheme();
+    this.themeService.toggleTheme();
   }
 
   receiveInputData($event: string): void {
@@ -50,7 +60,7 @@ export class AppComponent implements OnInit {
 
   cooncatById(userData: User[], creditsData: Account[]): void {
     const tableData: DataTable[] = [];
-    userData?.map((userItem: User) => {
+    userData.map((userItem: User) => {
       const creditItem = creditsData.find(
         (credit: Account) => credit.id === userItem.id
       );
