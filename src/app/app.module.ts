@@ -11,6 +11,7 @@ import { appReducer } from './store/app.reducer';
 import { AppEffects } from './store/app.effects';
 import { FilterComponent } from './components/filter/filter.component';
 import { TableComponent } from './components/table/table.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AccountsService } from './services/accounts.service';
 import { UsersService } from './services/users.service';
 import { ThemeService } from './services/themes.service';
@@ -23,7 +24,12 @@ import { ThemeService } from './services/themes.service';
     StoreModule.forRoot({ app: appReducer }),
     EffectsModule.forRoot([AppEffects]),
   ],
-  declarations: [AppComponent, FilterComponent, TableComponent],
+  declarations: [
+    AppComponent,
+    FilterComponent,
+    TableComponent,
+    PaginatorComponent,
+  ],
   bootstrap: [AppComponent],
   providers: [AccountsService, UsersService, ThemeService],
 })
