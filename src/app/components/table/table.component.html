@@ -7,32 +7,41 @@
     <td>{{ cellData.credit }}</td>
   </tr>
 </table>
-<div class="pagination-buttons">
-  <button
-    (click)="goToPreviousPage()"
-    [disabled]="previousButtonDisabled"
-    [ngClass]="{
-      'disabled-button': previousButtonDisabled
-    }"
-  >
-    < Previous
-  </button>
-  <button
-    (click)="goToNextPage()"
-    [disabled]="nextButtonDisabled"
-    [ngClass]="{
-      'disabled-button': nextButtonDisabled
-    }"
-  >
-    Next >
-  </button>
+<!--paginator -->
+<div class="pagination">
+  <!--items per page-->
+  <div class="pagination-item-per-page">
+    <span> items per page: </span>
+    <select (change)="onSelectionChange($event.target.value)">
+      >
+      <option *ngFor="let option of itemsPerPage" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <!-- next/prev buttons-->
+  <div class="pagination-buttons">
+    <span class="pagination-status">{{
+      startIndex + 1 + '-' + endIndex + ' of ' + length
+    }}</span>
+    <button
+      (click)="goToPreviousPage()"
+      [disabled]="previousButtonDisabled"
+      [ngClass]="{
+        'disabled-button': previousButtonDisabled
+      }"
+    >
+      <
+    </button>
+    <button
+      (click)="goToNextPage()"
+      [disabled]="nextButtonDisabled"
+      [ngClass]="{
+        'disabled-button': nextButtonDisabled
+      }"
+    >
+      >
+    </button>
+  </div>
 </div>
-<div class="pagination-status">
-  <span>{{ currentPage + '/' + totalPages }}</span>
-</div>
-<select (change)="onSelectionChange($event.target.value)">
-  >
-  <option *ngFor="let option of itemsPerPage" [value]="option">
-    {{ option }}
-  </option>
-</select>

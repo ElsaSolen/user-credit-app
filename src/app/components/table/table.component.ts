@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { log } from 'console';
 import { DataTable } from '../../interfaces/dataTable.interface';
 
 @Component({
@@ -19,11 +20,15 @@ export class TableComponent implements OnInit, OnChanges {
   currentPage: number = 1;
   itemsPerPage: number[] = [3, 5, 10];
   selectedOption: number = 3;
+  length: number;
 
   totalPages: number;
   pagedData: DataTable[];
   previousButtonDisabled: boolean;
   nextButtonDisabled: boolean;
+
+  startIndex: number;
+  endIndex: number;
 
   constructor() {}
 
@@ -38,9 +43,13 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   calculatePagination(): void {
-    const startIndex = (this.currentPage - 1) * this.selectedOption;
-    const endIndex = startIndex + this.selectedOption;
-    this.pagedData = this.data.slice(startIndex, endIndex);
+    this.length = this.data.length;
+    this.startIndex = (this.currentPage - 1) * this.selectedOption;
+    this.endIndex =
+      this.startIndex + this.selectedOption < this.length
+        ? this.startIndex + this.selectedOption
+        : this.length;
+    this.pagedData = this.data.slice(this.startIndex, this.endIndex);
     this.totalPages = Math.ceil(this.data.length / this.selectedOption);
     this.updateDisabledButtons();
   }
@@ -61,8 +70,8 @@ export class TableComponent implements OnInit, OnChanges {
     this.calculatePagination();
   }
 
-  onSelectionChange(selection: number): void {
-    this.selectedOption = selection;
+  onSelectionChange(selection: string): void {
+    this.selectedOption = parseInt(selection);
     this.calculatePagination();
   }
 }

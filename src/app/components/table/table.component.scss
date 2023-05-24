@@ -9,7 +9,6 @@ table {
   border-collapse: collapse;
   border: 1px solid var(--secondary-color);
   background: var(--background);
-  order: 2;
   th {
     height: 54px;
     font-weight: lighter;
@@ -34,20 +33,20 @@ table {
 }
 
 .pagination {
-  &-buttons {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    order: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 0.5rem;
 
+  &-buttons {
+    display: flex;
     button {
       color: var(--secondary-color);
       background: white;
-      border: 2px solid var(--secondary-color);
       border-radius: 3px;
-      padding: 7px;
+      margin-right: 0.5rem;
     }
     button:hover:not([disabled]) {
       color: white;
@@ -60,24 +59,24 @@ table {
     }
   }
   &-status {
-    width: 100%;
-    max-width: 100px;
-    display: flex;
-    justify-content: center;
-    border: 2px solid var(--secondary-color);
+    text-align: center;
     border-radius: 3px;
-    margin-top: 0.5rem;
-    order: 3;
+    margin-right: 0.5rem;
+    padding: 5px;
     span {
       color: var(--secondary-color);
     }
   }
 }
+.pagination-item-per-page {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
 
-select {
-  order: 4;
-  padding: 5px;
-  margin: 5px;
-  color: var(--secondary-color);
-  outline-color: var(--secondary-color);
+  select {
+    color: var(--secondary-color);
+    outline-color: var(--secondary-color);
+    margin-left: 0.5rem;
+    padding: 5px;
+  }
 }
