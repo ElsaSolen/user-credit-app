@@ -11,7 +11,8 @@ h1 {
   text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-div {
+.warning,
+.nodata {
   max-width: 600px;
   height: 10rem;
   border: 1px solid var(--secondary-color);
@@ -25,16 +26,30 @@ div {
   border: 3px solid red;
 }
 
-button {
-  background: var(--primary-color);
-  color: white;
+.toggle-container {
+  margin: 2rem;
   width: 50px;
-  height: 50px;
+  height: 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+  border-color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.toggle-handle {
+  width: 20px;
+  height: 20px;
+  background-color: var(--background);
   border-radius: 50%;
-  border: none;
+  margin: 2.5px;
+  transition: transform 0.3s;
+  position: absolute;
+  left: 0;
+  border-color: var(--primary-color);
 }
 
-button:active {
-  background: var(--tritiary-color);
+.toggle-container.checked .toggle-handle {
+  transform: translateX(25px);
 }
-

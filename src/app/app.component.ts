@@ -21,27 +21,26 @@ import { ThemeService } from './services/themes.service';
 })
 export class AppComponent implements OnInit {
   data: DataTable[];
+  checked: boolean;
 
   spinner$ = this.store.select(selectors.getLoader);
+  users$ = this.store.select(selectors.getUsers);
+  accounts$ = this.store.select(selectors.getAccounts);
   showErrorPage$ = this.store.select(selectors.getError);
-  dataNotFound: boolean = false;
 
   tableDataSelector$ = combineLatest([
-    this.store.select(selectors.getUsers),
-    this.store.select(selectors.getAccounts),
-    this.store.select(selectors.getLoader),
+    this.users$,
+    this.accounts$,
+    this.spinner$,
   ]).pipe(
     tap(([users, accounts, spinner]: [User[], Account[], boolean]) => {
-      this.store.dispatch(setError({ error: false }));
+      //spinner is set to false only if we have data sent from the services, if there is no data sent it will loop indefinetly
       if (users?.length && accounts?.length && spinner) {
-        this.cooncatById(users, accounts);
         this.store.dispatch(setLoader({ loader: false }));
         this.cdRef.detectChanges();
-      } else if ((!users?.length || !accounts?.length )&& !spinner) {
-        this.dataNotFound = true;
-      } else {
-        this.cooncatById(users, accounts);
       }
+      this.store.dispatch(setError({ error: false }));
+      this.cooncatById(users, accounts);
     })
   );
 
@@ -58,15 +57,15 @@ export class AppComponent implements OnInit {
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
+    this.checked = !this.checked;
+
   }
 
   receiveInputData($event: string): void {
     this.store.dispatch(getUserInfo({ user: $event }));
-    this.dataNotFound = false;
   }
 
   cooncatById(userData: User[], creditsData: Account[]): void {
-    console.log(userData, creditsData);
     const tableData: DataTable[] = [];
     userData.map((userItem: User) => {
       const creditItem = creditsData.find(

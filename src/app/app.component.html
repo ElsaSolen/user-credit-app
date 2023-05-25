@@ -1,17 +1,25 @@
 <h1>User Credit</h1>
-<button (click)="toggleTheme()">Press</button>
-
 <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
 
-<div *ngIf="showErrorPage$ | async; else content" class="warning">
+<div class="toggle-container" [class.checked]="checked" (click)="toggleTheme()">
+  <div class="toggle-handle"></div>
+</div>
+
+<div
+  class="warning"
+  *ngIf="showErrorPage$ | async; else content"
+  class="warning"
+>
   {{ 'Failed to Load the list' | uppercase }}
 </div>
 
 <ng-template #content>
-  <spinner *ngIf="spinner$ | async as spinner"></spinner>
+  <spinner *ngIf="spinner$ | async"> </spinner>
   <app-table
     *ngIf="(tableDataSelector$ | async) && data?.length"
     [data]="data"
   ></app-table>
-  <div *ngIf="dataNotFound">Data not found</div>
+  <div class="nodata" *ngIf="!data?.length && !(spinner$ | async)">
+    Data not found
+  </div>
 </ng-template>

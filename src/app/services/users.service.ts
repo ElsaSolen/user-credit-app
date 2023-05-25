@@ -4,7 +4,7 @@ import { Observable, of, delay } from 'rxjs';
 
 @Injectable()
 export class UsersService {
-  getUsers(searchUser: string): Observable<User[]> {
+  getUsers(searchUser: string): Observable<User[]> | void {
     if (searchUser.length >= 10) {
       throw new Error('Error of getUsers!');
     } else {

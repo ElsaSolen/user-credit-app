@@ -7,10 +7,11 @@ import { UsersService } from '../services/users.service';
 import { AccountsService } from '../services/accounts.service';
 import { Store } from '@ngrx/store';
 import { setError } from './app.actions';
+import { User } from '../interfaces/user.interface';
+import { Account } from '../interfaces/account.interface';
 
 @Injectable()
 export class AppEffects {
-  
   userFetching$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoreActions.getUserInfo),
@@ -19,14 +20,12 @@ export class AppEffects {
         this.store.dispatch(setError({ error: true }));
         return throwError(error);
       }),
-      map((rawData): any => {
+      map((rawData) => {
         if (rawData) {
-          console.log('--users', rawData);
           return StoreActions.setUserInfo({
-            users: rawData,
+            users: rawData as User[],
           });
         } else {
-          console.log('--spinner effect', true);
           return StoreActions.setLoader({
             loader: true,
           });
@@ -34,9 +33,6 @@ export class AppEffects {
       })
     )
   );
-
-
-
 
   accountsFetching$ = createEffect(() =>
     this.actions$.pipe(
@@ -48,12 +44,10 @@ export class AppEffects {
       }),
       map((rawData) => {
         if (rawData) {
-          console.log('--accounts', rawData);
           return StoreActions.setAccountInfo({
-            accounts: rawData,
+            accounts: rawData as Account[],
           });
         } else {
-          console.log('--spinner effect', rawData);
           return StoreActions.setLoader({
             loader: true,
           });

@@ -30,7 +30,7 @@ export class PaginatorComponent implements OnInit {
   endIndex: number;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.data) {
+    if (changes.childData) {
       this.calculatePagination();
     }
   }
