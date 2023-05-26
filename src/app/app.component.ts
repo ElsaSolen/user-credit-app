@@ -20,6 +20,7 @@ import { ThemeService } from './services/themes.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  icon: string = 'assets/icons/sun.svg';
   data: DataTable[];
   checked: boolean;
 
@@ -59,6 +60,9 @@ export class AppComponent implements OnInit {
     this.themeService.toggleTheme();
     this.checked = !this.checked;
 
+    this.checked
+      ? (this.icon = 'assets/icons/moon.svg')
+      : (this.icon = 'assets/icons/sun.svg');
   }
 
   receiveInputData($event: string): void {

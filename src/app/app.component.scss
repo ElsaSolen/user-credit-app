@@ -53,3 +53,15 @@ h1 {
 .toggle-container.checked .toggle-handle {
   transform: translateX(25px);
 }
+
+svg {
+  position: absolute;
+  right: 0;
+  transition: transform 0.3s;
+  margin-right: 5px;
+}
+
+.toggle-container.checked svg {
+  transform: translateX(-25px);
+  margin-right: 0px;
+}
