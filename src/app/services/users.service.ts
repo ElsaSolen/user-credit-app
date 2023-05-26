@@ -4,6 +4,8 @@ import { Observable, of, delay } from 'rxjs';
 
 @Injectable()
 export class UsersService {
+  private firstCall = true;
+
   getUsers(searchUser: string): Observable<User[]> | void {
     if (searchUser.length >= 10) {
       throw new Error('Error of getUsers!');
@@ -11,7 +13,12 @@ export class UsersService {
       const filteredUsers = users.filter((value: User) =>
         value.name.toLowerCase().includes(searchUser.toLowerCase())
       );
-      return of(filteredUsers).pipe(delay(1000));
+      if (this.firstCall) {
+        this.firstCall = false;
+        return of(filteredUsers).pipe(delay(1000));
+      } else {
+        return of(filteredUsers);
+      }
     }
   }
 }
