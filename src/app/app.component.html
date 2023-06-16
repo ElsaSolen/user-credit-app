@@ -1,6 +1,9 @@
 <h1>User Credit</h1>
 <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
-<app-toggle [icon]="icon" (themeChanged)="receiveToggledTheme($event)"></app-toggle>
+<app-toggle
+  [icon]="icon"
+  (themeChanged)="receiveToggledTheme($event)"
+></app-toggle>
 
 <div
   class="warning"
@@ -13,7 +16,7 @@
   <spinner *ngIf="spinner$ | async"> </spinner>
   <app-table
     *ngIf="(tableDataSelector$ | async) && data?.length"
-    [data]="data"
+    [rawData]="data"
   ></app-table>
   <div class="nodata" *ngIf="!data?.length && !(spinner$ | async)">
     Data not found

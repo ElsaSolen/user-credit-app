@@ -2,9 +2,9 @@
   <tr>
     <th *ngFor="let header of headers">{{ header }}</th>
   </tr>
-  <tr *ngFor="let cellData of pagedData">
+  <tr *ngFor="let cellData of displayData">
     <td>{{ cellData.user }}</td>
     <td>{{ cellData.credit }}</td>
   </tr>
 </table>
-<app-paginator [childData]="data" (pagedData)="dataPerPage($event)"></app-paginator>
+<app-paginator [childData]="rawData" (paginatedData)="dataPerPage($event)"></app-paginator>

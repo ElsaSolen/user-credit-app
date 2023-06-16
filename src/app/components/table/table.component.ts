@@ -7,17 +7,17 @@ import { DataTable } from '@interfaces/index';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  @Input() data: DataTable[];
+  @Input() rawData: DataTable[];
   readonly headers: string[] = ['users', 'credits'];
 
-  pagedData: DataTable[] = [];
+  displayData: DataTable[] = [];
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
 
-  dataPerPage(data: DataTable[]): void {
-    this.pagedData = data;
+  dataPerPage(paginatedData: DataTable[]): void {
+    this.displayData = paginatedData;
     this.cdr.detectChanges();
   }
 }

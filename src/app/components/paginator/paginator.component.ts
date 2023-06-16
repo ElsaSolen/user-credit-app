@@ -15,7 +15,7 @@ import { DataTable } from '@interfaces/index';
 })
 export class PaginatorComponent implements OnInit {
   @Input() childData: DataTable[];
-  @Output() pagedData = new EventEmitter<DataTable[]>();
+  @Output() paginatedData = new EventEmitter<DataTable[]>();
 
   currentPage: number = 1;
   itemsPerPage: number[] = [3, 5, 10];
@@ -50,7 +50,7 @@ export class PaginatorComponent implements OnInit {
         : this.length;
     const dataSliced = this.childData.slice(this.startIndex, this.endIndex);
 
-    this.pagedData.emit(dataSliced);
+    this.paginatedData.emit(dataSliced);
     this.totalPages = Math.ceil(this.childData.length / this.selectedOption);
     this.updateDisabledButtons();
   }
