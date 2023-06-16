@@ -17,10 +17,10 @@ export class PaginatorComponent implements OnInit {
   @Input() childData: DataTable[];
   @Output() paginatedData = new EventEmitter<DataTable[]>();
 
-  currentPage: number = 1;
-  itemsPerPage: number[] = [3, 5, 10];
-  selectedOption: number = 3;
-  length: number = 0;
+  currentPage = 1;
+  itemsPerPageOptions = [3, 5, 10];
+  selectedOption = 3;
+  length = 0;
 
   totalPages: number;
   previousButtonDisabled: boolean;
@@ -29,36 +29,34 @@ export class PaginatorComponent implements OnInit {
   startIndex: number;
   endIndex: number;
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.childData) {
-      this.calculatePagination();
-    }
-  }
-
   constructor() {}
 
   ngOnInit(): void {
     this.calculatePagination();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.childData) {
+      this.calculatePagination();
+    }
+  }
+
   calculatePagination(): void {
-    let dataSliced = [];
     this.length = this.childData.length;
     if (this.childData.length < this.selectedOption) {
       this.currentPage = 1;
       this.totalPages = 1;
       this.startIndex = 0;
       this.endIndex = this.childData.length;
-      dataSliced = this.childData;
     } else {
       this.startIndex = (this.currentPage - 1) * this.selectedOption;
-      this.endIndex =
-        this.startIndex + this.selectedOption < this.length
-          ? this.startIndex + this.selectedOption
-          : this.length;
-      dataSliced = this.childData.slice(this.startIndex, this.endIndex);
+      this.endIndex = Math.min(
+        this.startIndex + this.selectedOption,
+        this.length
+      );
     }
 
+    const dataSliced = this.childData.slice(this.startIndex, this.endIndex);
     this.paginatedData.emit(dataSliced);
     this.totalPages = Math.ceil(this.childData.length / this.selectedOption);
     this.updateDisabledButtons();
@@ -81,7 +79,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   onSelectionChange(selection: string): void {
-    this.selectedOption = parseInt(selection);
+    this.selectedOption = parseInt(selection, 10);
     this.calculatePagination();
   }
 }
