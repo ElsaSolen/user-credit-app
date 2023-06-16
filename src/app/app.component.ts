@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -35,18 +35,13 @@ export class AppComponent implements OnInit {
       //spinner is set to false only if we have data sent from the services, if there is no data sent it will loop indefinetly
       if (users?.length && accounts?.length && spinner) {
         this.store.dispatch(setLoader({ loader: false }));
-        this.cdRef.detectChanges();
       }
       this.store.dispatch(setError({ error: false }));
       this.cooncatById(users, accounts);
     })
   );
 
-  constructor(
-    private store: Store,
-    private themeService: ThemeService,
-    private cdRef: ChangeDetectorRef
-  ) {}
+  constructor(private store: Store, private themeService: ThemeService) {}
 
   ngOnInit(): void {
     this.store.dispatch(getUserInfo({ user: '' }));
