@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import * as StoreActions from './app.actions';
-import { UsersService } from '../services/users.service';
-import { AccountsService } from '../services/accounts.service';
 import { Store } from '@ngrx/store';
-import { setError } from './app.actions';
-import { Account, User } from '../interfaces/index';
-import { Observable } from 'rxjs';
+import * as StoreActions from './app.actions';
+import { Account, User } from '@interfaces/index';
+import { UsersService, AccountsService } from '../services/index';
 
 @Injectable()
 export class AppEffects {
@@ -17,7 +14,7 @@ export class AppEffects {
       ofType(StoreActions.getUserInfo),
       mergeMap((action) => this.userService.getUsers(action.user)),
       catchError((error) => {
-        this.store.dispatch(setError({ error: true }));
+        this.store.dispatch(StoreActions.setError({ error: true }));
         return throwError(error);
       }),
       map((rawData) => {
@@ -39,7 +36,7 @@ export class AppEffects {
       ofType(StoreActions.getUserInfo),
       mergeMap(() => this.accountsService.getAccounts()),
       catchError((error) => {
-        this.store.dispatch(setError({ error: true }));
+        this.store.dispatch(StoreActions.setError({ error: true }));
         return throwError(error);
       }),
       map((rawData) => {

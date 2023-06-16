@@ -6,7 +6,7 @@ import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
   styleUrls: ['./toggle.component.scss'],
 })
 export class ToggleComponent implements OnInit {
-  @Input() icon: string;
+  @Input() icon?: string;
   @Output() themeChanged = new EventEmitter<boolean>();
 
   checked: boolean = false;

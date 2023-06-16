@@ -1,5 +1,4 @@
-import { Account } from '../interfaces/account.interface';
-import { User } from '../interfaces/user.interface';
+import { Account, User } from '@interfaces/index';
 
 export interface AppState {
   users: User[];

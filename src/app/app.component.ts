@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Account, User, DataTable } from './interfaces/index';
+import { Account, User, DataTable } from '@interfaces/index';
 import {
   getAccountInfo,
   getUserInfo,
@@ -10,7 +10,7 @@ import {
   setLoader,
 } from './store/app.actions';
 import * as selectors from './store/app.selectors';
-import { ThemeService } from './services/themes.service';
+import { ThemeService } from './services/index';
 
 @Component({
   selector: 'my-app',
