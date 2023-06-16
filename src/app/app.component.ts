@@ -2,9 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Account } from './interfaces/account.interface';
-import { DataTable } from './interfaces/dataTable.interface';
-import { User } from './interfaces/user.interface';
+import { Account, User, DataTable } from './interfaces/index';
 import {
   getAccountInfo,
   getUserInfo,

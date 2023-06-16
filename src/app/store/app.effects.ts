@@ -7,8 +7,7 @@ import { UsersService } from '../services/users.service';
 import { AccountsService } from '../services/accounts.service';
 import { Store } from '@ngrx/store';
 import { setError } from './app.actions';
-import { User } from '../interfaces/user.interface';
-import { Account } from '../interfaces/account.interface';
+import { Account, User } from '../interfaces/index';
 
 @Injectable()
 export class AppEffects {

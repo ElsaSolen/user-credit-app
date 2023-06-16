@@ -6,7 +6,7 @@ import {
   Input,
   SimpleChanges,
 } from '@angular/core';
-import { DataTable } from '../../interfaces/dataTable.interface';
+import { DataTable } from '../../interfaces/index';
 
 @Component({
   selector: 'app-paginator',

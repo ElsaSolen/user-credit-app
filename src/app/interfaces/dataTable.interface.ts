@@ -1,5 +1,4 @@
-import { Account } from "./account.interface";
-import { User } from "./user.interface";
+import { Account, User } from './index';
 
 export interface DataTable {
   user: User['name'];
