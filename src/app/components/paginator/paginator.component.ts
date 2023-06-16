@@ -17,10 +17,10 @@ export class PaginatorComponent implements OnInit {
   @Input() childData: DataTable[];
   @Output() paginatedData = new EventEmitter<DataTable[]>();
 
-  currentPage = 1;
-  itemsPerPageOptions = [3, 5, 10];
-  selectedOption = 3;
-  length = 0;
+  currentPage: number = 1;
+  itemsPerPageOptions: number[] = [3, 5, 10];
+  selectedOption: number = 3;
+  length: number = 0;
 
   totalPages: number;
   previousButtonDisabled: boolean;
@@ -79,7 +79,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   onSelectionChange(selection: string): void {
-    this.selectedOption = parseInt(selection, 10);
+    this.selectedOption = parseInt(selection);
     this.calculatePagination();
   }
 }
