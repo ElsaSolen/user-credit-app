@@ -42,13 +42,22 @@ export class PaginatorComponent implements OnInit {
   }
 
   calculatePagination(): void {
+    let dataSliced = [];
     this.length = this.childData.length;
-    this.startIndex = (this.currentPage - 1) * this.selectedOption;
-    this.endIndex =
-      this.startIndex + this.selectedOption < this.length
-        ? this.startIndex + this.selectedOption
-        : this.length;
-    const dataSliced = this.childData.slice(this.startIndex, this.endIndex);
+    if (this.childData.length < this.selectedOption) {
+      this.currentPage = 1;
+      this.totalPages = 1;
+      this.startIndex = 0;
+      this.endIndex = this.childData.length;
+      dataSliced = this.childData;
+    } else {
+      this.startIndex = (this.currentPage - 1) * this.selectedOption;
+      this.endIndex =
+        this.startIndex + this.selectedOption < this.length
+          ? this.startIndex + this.selectedOption
+          : this.length;
+      dataSliced = this.childData.slice(this.startIndex, this.endIndex);
+    }
 
     this.paginatedData.emit(dataSliced);
     this.totalPages = Math.ceil(this.childData.length / this.selectedOption);
