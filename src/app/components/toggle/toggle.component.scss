@@ -40,3 +40,12 @@ svg {
   transform: translateX(-25px);
   margin-right: 0px;
 }
+
+@media (max-width: 344px) {
+  .toggle-container {
+    left: unset;
+    top: unset;
+    bottom: 0;
+    right: 0;
+  }
+}
