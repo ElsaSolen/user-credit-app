@@ -1,14 +1,6 @@
 <h1>User Credit</h1>
 <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
-
-<div class="toggle-container" [class.checked]="checked" (click)="toggleTheme()">
-  <div class="toggle-handle"></div>
-
-<svg width="20" height="20" >
-  <image [attr.xlink:href]="icon" width="18" height="18"/>
-</svg>
-
-</div>
+<app-toggle [icon]="icon" (themeChanged)="receiveToggledTheme($event)"></app-toggle>
 
 <div
   class="warning"
@@ -17,7 +9,6 @@
 >
   {{ 'Failed to Load the list' | uppercase }}
 </div>
-
 <ng-template #content>
   <spinner *ngIf="spinner$ | async"> </spinner>
   <app-table

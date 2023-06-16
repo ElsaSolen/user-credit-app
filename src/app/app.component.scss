@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   color: var(--text-color);
+  //position: relative;
 }
 h1 {
   text-align: center;
@@ -24,44 +25,4 @@ h1 {
   font-size: 20px;
   text-align: center;
   border: 3px solid red;
-}
-
-.toggle-container {
-  margin: 2rem;
-  width: 50px;
-  height: 25px;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  position: relative;
-  border-color: var(--primary-color);
-  background-color: var(--secondary-color);
-}
-
-.toggle-handle {
-  width: 20px;
-  height: 20px;
-  background-color: var(--background);
-  border-radius: 50%;
-  margin: 2.5px;
-  transition: transform 0.3s;
-  position: absolute;
-  left: 0;
-  border-color: var(--primary-color);
-}
-
-.toggle-container.checked .toggle-handle {
-  transform: translateX(25px);
-}
-
-svg {
-  position: absolute;
-  right: 0;
-  transition: transform 0.3s;
-  margin-right: 5px;
-}
-
-.toggle-container.checked svg {
-  transform: translateX(-25px);
-  margin-right: 0px;
 }

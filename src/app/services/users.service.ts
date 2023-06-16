@@ -6,7 +6,7 @@ import { Observable, of, delay } from 'rxjs';
 export class UsersService {
   private firstCall = true;
 
-  getUsers(searchUser: string): Observable<User[]> | void {
+  getUsers(searchUser: string): Observable<User[]> {
     if (searchUser.length >= 10) {
       throw new Error('Error of getUsers!');
     } else {

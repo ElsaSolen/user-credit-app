@@ -20,7 +20,6 @@ import { ThemeService } from './services/themes.service';
 export class AppComponent implements OnInit {
   icon: string = 'assets/icons/sun.svg';
   data: DataTable[];
-  checked: boolean;
 
   spinner$ = this.store.select(selectors.getLoader);
   users$ = this.store.select(selectors.getUsers);
@@ -53,12 +52,9 @@ export class AppComponent implements OnInit {
     this.store.dispatch(getUserInfo({ user: '' }));
     this.store.dispatch(getAccountInfo());
   }
-
-  toggleTheme(): void {
+  receiveToggledTheme($event: boolean): void {
     this.themeService.toggleTheme();
-    this.checked = !this.checked;
-
-    this.checked
+    $event
       ? (this.icon = 'assets/icons/moon.svg')
       : (this.icon = 'assets/icons/sun.svg');
   }

@@ -16,6 +16,7 @@ import { AccountsService } from './services/accounts.service';
 import { UsersService } from './services/users.service';
 import { ThemeService } from './services/themes.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ToggleComponent } from './components/toggle/toggle.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -30,7 +31,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     FilterComponent,
     TableComponent,
     PaginatorComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ToggleComponent,
   ],
   bootstrap: [AppComponent],
   providers: [AccountsService, UsersService, ThemeService],
