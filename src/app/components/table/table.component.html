@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <th *ngFor="let header of headers">{{ header }}</th>
+    <th *ngFor="let header of headers" (click)="sort(header)">{{ header }}</th>
   </tr>
   <tr *ngFor="let cellData of displayData">
     <td>{{ cellData.user }}</td>
