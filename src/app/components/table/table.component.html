@@ -1,10 +1,25 @@
 <table>
   <tr>
-    <th *ngFor="let header of headers" (click)="sort(header)">{{ header }}</th>
+    <th *ngFor="let header of headers" (click)="sort(header)">
+      <span>{{ header }}</span>
+      <span
+        class="arrow-top"
+        [class.disabled]="header === 'users' ? !ascUsers : !ascCredits"
+        >↑</span
+      >
+      <span
+        class="arrow-bottom"
+        [class.disabled]="header === 'users' ? ascUsers : ascCredits"
+        >↓</span
+      >
+    </th>
   </tr>
   <tr *ngFor="let cellData of displayData">
     <td>{{ cellData.user }}</td>
     <td>{{ cellData.credit }}</td>
   </tr>
 </table>
-<app-paginator [childData]="rawData" (paginatedData)="dataPerPage($event)"></app-paginator>
+<app-paginator
+  [childData]="rawData"
+  (paginatedData)="dataPerPage($event)"
+></app-paginator>

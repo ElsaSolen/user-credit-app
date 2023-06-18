@@ -1,3 +1,4 @@
+import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataTable } from '@interfaces/index';
 
@@ -44,9 +45,8 @@ export class TableComponent implements OnInit {
         }
         return 0;
       });
+      this.ascUsers = !this.ascUsers;
     }
-
-    this.ascUsers = !this.ascUsers;
     this.rawData = arr;
   }
 }
