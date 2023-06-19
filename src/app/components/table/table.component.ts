@@ -1,6 +1,6 @@
-import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataTable } from '@interfaces/index';
+import { sortData } from './../../utils/sorting.util';
 
 @Component({
   selector: 'app-table',
@@ -12,6 +12,8 @@ export class TableComponent implements OnInit {
   readonly headers: string[] = ['users', 'credits'];
 
   displayData: DataTable[] = [];
+  ascCredits: boolean = false;
+  ascUsers: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -22,31 +24,20 @@ export class TableComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  ascCredits = false;
-  ascUsers = false;
+  sort(sortKey: string): void {
+    let sortOrder: 'asc' | 'desc';
+    let sortType: number | string;
 
-  sort(header) {
-    let arr = [];
-    if (header === 'credits') {
-      arr = this.rawData.slice().sort((a, b) => {
-        return this.ascCredits ? b.credit - a.credit : a.credit - b.credit;
-      });
+    sortKey = sortKey.slice(0, -1);
+    sortKey === 'credit' ? (sortType = 0) : (sortType = '');
+
+    if (typeof sortType === 'number') {
+      this.ascCredits ? (sortOrder = 'desc') : (sortOrder = 'asc');
       this.ascCredits = !this.ascCredits;
     } else {
-      arr = this.rawData.slice().sort((a, b) => {
-        const userA = a.user.toUpperCase();
-        const userB = b.user.toUpperCase();
-
-        if (userA < userB) {
-          return this.ascUsers ? 1 : -1;
-        }
-        if (userA > userB) {
-          return this.ascUsers ? -1 : 1;
-        }
-        return 0;
-      });
+      this.ascUsers ? (sortOrder = 'desc') : (sortOrder = 'asc');
       this.ascUsers = !this.ascUsers;
     }
-    this.rawData = arr;
+    this.rawData = sortData(this.rawData, sortType, sortKey, sortOrder);
   }
 }
