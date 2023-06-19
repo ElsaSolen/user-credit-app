@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataTable } from '@interfaces/index';
 import { sortData } from './../../utils/sorting.util';
-import { TranslateService } from '@ngx-translate/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-table',

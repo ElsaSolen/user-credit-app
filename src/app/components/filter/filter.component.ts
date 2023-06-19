@@ -15,7 +15,7 @@ export class FilterComponent implements OnInit {
   @Output() inputChanged = new EventEmitter<string>();
 
   @HostListener('input', ['$event'])
-  onInputChange(event: InputEvent) {
+  onInputChange(event: InputEvent): void {
     const inputElement = event.target as HTMLInputElement;
     this.inputChanged.emit(inputElement.value);
   }

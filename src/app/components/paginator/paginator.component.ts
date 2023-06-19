@@ -5,6 +5,7 @@ import {
   Output,
   Input,
   SimpleChanges,
+  OnChanges,
 } from '@angular/core';
 import { DataTable } from '@interfaces/index';
 
@@ -13,7 +14,7 @@ import { DataTable } from '@interfaces/index';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnChanges {
   @Input() childData: DataTable[];
   @Output() paginatedData = new EventEmitter<DataTable[]>();
 
