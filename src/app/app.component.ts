@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
       if (users?.length && accounts?.length && spinner) {
         this.store.dispatch(setLoader({ loader: false }));
       }
-      this.store.dispatch(setError({ error: false }));
       this.cooncatById(users, accounts);
     })
   );
