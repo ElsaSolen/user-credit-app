@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataTable } from '@interfaces/index';
 import { sortData } from './../../utils/sorting.util';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table',
@@ -9,15 +10,22 @@ import { sortData } from './../../utils/sorting.util';
 })
 export class TableComponent implements OnInit {
   @Input() rawData: DataTable[];
-  readonly headers: string[] = ['users', 'credits'];
-
+  readonly headers: string[] = [
+    this.translate.instant('users'),
+    this.translate.instant('credits'),
+  ];
   displayData: DataTable[] = [];
   ascCredits: boolean = false;
   ascUsers: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('test', this.translate.instant('users'));
+  }
 
   dataPerPage(paginatedData: DataTable[]): void {
     this.displayData = paginatedData;

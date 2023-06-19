@@ -1,7 +1,7 @@
 <div class="pagination">
   <!--items per page-->
   <div class="pagination-item-per-page">
-    <span> items per page: </span>
+    <span>{{ 'items-per-page' | translate }}</span>
     <select (change)="onSelectionChange($event.target.value)">
       <option *ngFor="let option of itemsPerPageOptions" [value]="option">
         {{ option }}

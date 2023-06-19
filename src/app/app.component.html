@@ -1,16 +1,16 @@
-<h1>User Credit</h1>
+<h1>{{ 'title' | translate }}</h1>
 <app-filter (inputChanged)="receiveInputData($event)"></app-filter>
 <app-toggle
   [icon]="icon"
   (themeChanged)="receiveToggledTheme($event)"
 ></app-toggle>
-
+<app-language-switcher></app-language-switcher>
 <div
   class="warning"
   *ngIf="showErrorPage$ | async; else content"
   class="warning"
 >
-  {{ 'Failed to Load the list' | uppercase }}
+  {{ 'warning' | translate | uppercase }}
 </div>
 <ng-template #content>
   <spinner *ngIf="spinner$ | async"> </spinner>
@@ -19,6 +19,6 @@
     [rawData]="data"
   ></app-table>
   <div class="nodata" *ngIf="!data?.length && !(spinner$ | async)">
-    Data not found
+    {{ 'no-data' | translate }}
   </div>
 </ng-template>

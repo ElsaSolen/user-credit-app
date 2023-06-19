@@ -1,6 +1,2 @@
-<label for="search">Search Name</label>
-<input
-  type="text"
-  name="search"
-  (input)="onInputChange($event)"
-/>
+<label for="search"> {{ 'search' | translate }}</label>
+<input type="text" name="search" (input)="onInputChange($event)" />

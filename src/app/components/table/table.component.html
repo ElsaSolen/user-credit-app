@@ -4,12 +4,12 @@
       <span>{{ header }}</span>
       <span
         class="arrow-top"
-        [class.disabled]="header === 'users' ? !ascUsers : !ascCredits"
+        [class.disabled]="header === headers[0] ? !ascUsers : !ascCredits"
         >↑</span
       >
       <span
         class="arrow-bottom"
-        [class.disabled]="header === 'users' ? ascUsers : ascCredits"
+        [class.disabled]="header === headers[0] ? ascUsers : ascCredits"
         >↓</span
       >
     </th>
