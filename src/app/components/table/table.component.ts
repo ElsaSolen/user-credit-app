@@ -32,11 +32,8 @@ export class TableComponent implements OnInit {
     let sortOrder: 'asc' | 'desc';
     let sortType: number | string;
 
-
     sortKey === this.headers[1] ? (sortType = 0) : (sortType = '');
     sortKey = sortKey.slice(0, -1);
-    sortKey === 'credit' ? (sortType = 0) : (sortType = '');
-
     if (typeof sortType === 'number') {
       this.ascCredits ? (sortOrder = 'desc') : (sortOrder = 'asc');
       this.ascCredits = !this.ascCredits;
