@@ -3,12 +3,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Account, User, DataTable } from '@interfaces/index';
-import {
-  getAccountInfo,
-  getUserInfo,
-  setError,
-  setLoader,
-} from './store/app.actions';
+import { getAccountInfo, getUserInfo, setLoader } from './store/app.actions';
 import * as selectors from './store/app.selectors';
 import { ThemeService } from './services/index';
 
