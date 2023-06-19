@@ -13,11 +13,12 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class TableComponent implements OnInit {
   @Input() rawData: DataTable[];
-  headers: string[] = ['users', 'credits'];
 
-  displayData: DataTable[] = [];
-  ascCredits: boolean = false;
-  ascUsers: boolean = false;
+  readonly headers: string[] = ['users', 'credits'];
+  ascCredits = false;
+  ascUsers = false;
+
+  displayData: DataTable[];
 
   constructor(private cdr: ChangeDetectorRef) {}
 
