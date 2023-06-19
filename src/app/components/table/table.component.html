@@ -1,7 +1,7 @@
 <table>
   <tr>
     <th *ngFor="let header of headers" (click)="sort(header)">
-      <span>{{ header }}</span>
+      <span>{{ header | translate}}</span>
       <span
         class="arrow-top"
         [class.disabled]="header === headers[0] ? !ascUsers : !ascCredits"

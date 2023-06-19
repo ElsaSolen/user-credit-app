@@ -2,30 +2,26 @@ import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataTable } from '@interfaces/index';
 import { sortData } from './../../utils/sorting.util';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  providers: [TranslatePipe],
 })
 export class TableComponent implements OnInit {
   @Input() rawData: DataTable[];
-  readonly headers: string[] = [
-    this.translate.instant('users'),
-    this.translate.instant('credits'),
-  ];
+  headers: string[] = ['users', 'credits'];
+
   displayData: DataTable[] = [];
   ascCredits: boolean = false;
   ascUsers: boolean = false;
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private translate: TranslateService
-  ) {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
-    console.log('test', this.translate.instant('users'));
-  }
+  ngOnInit(): void {}
 
   dataPerPage(paginatedData: DataTable[]): void {
     this.displayData = paginatedData;
@@ -36,6 +32,8 @@ export class TableComponent implements OnInit {
     let sortOrder: 'asc' | 'desc';
     let sortType: number | string;
 
+
+    sortKey === this.headers[1] ? (sortType = 0) : (sortType = '');
     sortKey = sortKey.slice(0, -1);
     sortKey === 'credit' ? (sortType = 0) : (sortType = '');
 
