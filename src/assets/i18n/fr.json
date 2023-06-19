@@ -4,6 +4,6 @@
   "no-data": "Aucune information n'a été trouvée",
   "search": "Nom à rechercher",
   "items-per-page": "articles par page",
-  "users": "utilisateurs",
-  "credits": "crédits"
+  "user": "utilisateurs",
+  "credit": "crédits"
 }

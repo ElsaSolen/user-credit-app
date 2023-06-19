@@ -12,15 +12,17 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class TableComponent implements OnInit {
   @Input() rawData: DataTable[];
 
-  readonly headers: string[] = ['users', 'credits'];
-  ascCredits = false;
-  ascUsers = false;
+  sortOrder: 'asc' | 'desc' = 'desc';
 
   displayData: DataTable[];
+  headers: string[];
+  sortKey: string;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.headers = Object.keys(this.rawData[0]);
+  }
 
   dataPerPage(paginatedData: DataTable[]): void {
     this.displayData = paginatedData;
@@ -28,18 +30,9 @@ export class TableComponent implements OnInit {
   }
 
   sort(sortKey: string): void {
-    let sortOrder: 'asc' | 'desc';
-    let sortType: number | string;
-
-    sortKey === this.headers[1] ? (sortType = 0) : (sortType = '');
-    sortKey = sortKey.slice(0, -1);
-    if (typeof sortType === 'number') {
-      this.ascCredits ? (sortOrder = 'desc') : (sortOrder = 'asc');
-      this.ascCredits = !this.ascCredits;
-    } else {
-      this.ascUsers ? (sortOrder = 'desc') : (sortOrder = 'asc');
-      this.ascUsers = !this.ascUsers;
-    }
-    this.rawData = sortData(this.rawData, sortType, sortKey, sortOrder);
+    let sortType = typeof this.rawData[0][sortKey];
+    this.sortKey = sortKey;
+    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    this.rawData = sortData(this.rawData, sortType, sortKey, this.sortOrder);
   }
 }

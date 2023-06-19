@@ -1,28 +1,26 @@
-import { DataTable } from '@interfaces/index';
-
 export function sortData(
-  data: DataTable[],
-  sortType: number | string,
+  data: any[],
+  sortType: string,
   sortKey: string,
   sortOrder: 'asc' | 'desc'
-): DataTable[] {
+): any[] {
   let arr = [];
-  if (typeof sortType === 'number') {
+  if (sortType === 'number') {
     arr = data.slice().sort((a, b) => {
-      return sortOrder === 'desc'
+      return sortOrder === 'asc'
         ? a[sortKey] - b[sortKey]
         : b[sortKey] - a[sortKey];
     });
-  } else if (typeof sortType === 'string') {
+  } else if (sortType === 'string') {
     arr = data.slice().sort((a, b) => {
-      const userA = a[sortKey].toUpperCase();
-      const userB = b[sortKey].toUpperCase();
+      const elementA = a[sortKey].toUpperCase();
+      const elementB = b[sortKey].toUpperCase();
 
-      if (userA < userB) {
-        return sortOrder === 'desc' ? 1 : -1;
+      if (elementA < elementB) {
+        return sortOrder === 'asc' ? -1 : 1;
       }
-      if (userA > userB) {
-        return sortOrder === 'desc' ? -1 : 1;
+      if (elementA > elementB) {
+        return sortOrder === 'asc' ? 1 : -1;
       }
       return 0;
     });

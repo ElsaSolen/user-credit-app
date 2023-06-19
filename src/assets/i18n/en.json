@@ -4,6 +4,6 @@
   "no-data": "Data not found",
   "search": "Search Name",
   "items-per-page": "items per page",
-  "users": "users",
-  "credits": "credits"
+  "user": "users",
+  "credit": "credits"
 }
