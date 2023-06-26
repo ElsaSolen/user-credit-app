@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 import * as StoreActions from './app.actions';
 import { Account, User } from '@interfaces/index';
 import { UsersService, AccountsService } from '../services/index';
 
 @Injectable()
 export class AppEffects {
-  userFetching$: Observable<any> = createEffect(() =>
+  userFetching$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(StoreActions.getUserInfo),
       mergeMap((action) => this.userService.getUsers(action.user)),
@@ -31,7 +31,7 @@ export class AppEffects {
     )
   );
 
-  accountsFetching$: Observable<any> = createEffect(() =>
+  accountsFetching$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(StoreActions.getUserInfo),
       mergeMap(() => this.accountsService.getAccounts()),

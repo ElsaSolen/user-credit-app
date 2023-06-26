@@ -15,4 +15,7 @@ const accounts: Account[] = [
   { id: 3, credit: 5 },
   { id: 4, credit: 20 },
   { id: 5, credit: 25 },
+  { id: 6, credit: 35 },
+  { id: 7, credit: 80 },
+  { id: 8, credit: 9 },
 ];

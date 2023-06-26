@@ -8,6 +8,7 @@ export class UsersService {
 
   getUsers(searchUser: string): Observable<User[]> {
     if (searchUser.length >= 10) {
+      //Added this to simulate Api erroring
       throw new Error('Error of getUsers!');
     } else {
       const filteredUsers = users.filter((value: User) =>
@@ -15,6 +16,7 @@ export class UsersService {
       );
       if (this.firstCall) {
         this.firstCall = false;
+        //Added this to simulate Api delay while loading
         return of(filteredUsers).pipe(delay(1000));
       } else {
         return of(filteredUsers);
@@ -29,6 +31,6 @@ const users: User[] = [
   { id: 3, name: 'Roy' },
   { id: 4, name: 'Rober' },
   { id: 5, name: 'John' },
-  { id: 5, name: 'Trevor' },
-  { id: 5, name: 'Tanjiro' },
+  { id: 6, name: 'Trevor' },
+  { id: 7, name: 'Tanjiro' },
 ];

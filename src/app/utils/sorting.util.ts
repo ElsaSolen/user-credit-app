@@ -1,3 +1,4 @@
+// data && sortData type is any in order to sort any type of array and not necessarily 'DataTable' arrays
 export function sortData(
   data: any[],
   sortType: string,
