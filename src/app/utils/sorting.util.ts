@@ -1,10 +1,11 @@
-// data && sortData type is any in order to sort any type of array and not necessarily 'DataTable' arrays
+import { SortType } from './../types/sortType';
+
 export function sortData(
-  data: any[],
+  data: {}[],
   sortType: string,
   sortKey: string,
-  sortOrder: 'asc' | 'desc'
-): any[] {
+  sortOrder: SortType
+): {}[] {
   let arr = [];
   if (sortType === 'number') {
     arr = data.slice().sort((a, b) => {

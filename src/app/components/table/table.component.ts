@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
-import { DataTable } from '@interfaces/index';
 import { sortData } from './../../utils/sorting.util';
+import { SortType } from './../../types/sortType';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -10,11 +10,11 @@ import { TranslatePipe } from '@ngx-translate/core';
   providers: [TranslatePipe],
 })
 export class TableComponent implements OnInit {
-  @Input() rawData: DataTable[];
+  @Input() rawData: {}[];
 
-  sortOrder: 'asc' | 'desc' = 'desc';
+  sortOrder: SortType = 'desc';
 
-  displayData: DataTable[];
+  displayData: {}[];
   headers: string[];
   sortKey: string;
 
@@ -24,7 +24,7 @@ export class TableComponent implements OnInit {
     this.headers = Object.keys(this.rawData[0]);
   }
 
-  dataPerPage(paginatedData: DataTable[]): void {
+  dataPerPage(paginatedData: {}[]): void {
     this.displayData = paginatedData;
     this.cdr.detectChanges();
   }

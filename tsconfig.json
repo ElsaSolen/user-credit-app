@@ -15,7 +15,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@interfaces/*": ["src/app/interfaces/*"],
-      "@utils/*": ["src/app/utils/*"]
+      "@utils/*": ["src/app/utils/*"],
+      "@types/*": ["src/app/types/*"]
     }
   },
   "angularCompilerOptions": {
