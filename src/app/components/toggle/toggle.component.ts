@@ -9,7 +9,7 @@ export class ToggleComponent implements OnInit {
   @Input() icon?: string;
   @Output() themeChanged = new EventEmitter<boolean>();
 
-  checked: boolean = false;
+  checked = false;
 
   constructor() {}
 
