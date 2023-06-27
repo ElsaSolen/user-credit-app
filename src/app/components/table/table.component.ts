@@ -1,13 +1,11 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { sortData } from './../../utils/sorting.util';
 import { SortType } from './../../types/sortType';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [TranslatePipe],
 })
 export class TableComponent implements OnInit {
   @Input() rawData: {}[];
